@@ -250,6 +250,7 @@ size = Vector2(14, 22)
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 4
 script = ExtResource("1_8afob")
+jump_velocity = -360.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
