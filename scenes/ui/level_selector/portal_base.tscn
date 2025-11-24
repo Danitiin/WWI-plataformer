@@ -16,4 +16,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0028686523, 0)
 shape = SubResource("CylinderShape3D_ykb5k")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CylinderMesh_1p80h")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+pixel_size = 0.01
+billboard = 1
+text = "Nivel 1"
+font_size = 32
+
+[node name="ButtonSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+pixel_size = 0.01
+billboard = 1

@@ -1,0 +1,206 @@
+[gd_scene load_steps=16 format=3 uid="uid://cg721vsib53hd"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.5, 0.7, 1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+top_radius = 2.67
+bottom_radius = 3.33
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.4, 0.7, 0.3, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1"]
+height = 1.0
+radius = 3.33
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1"]
+size = Vector2(33.33, 33.33)
+subdivide_width = 32
+subdivide_depth = 32
+
+[sub_resource type="Shader" id="Shader_1"]
+code = "shader_type spatial;
+
+uniform vec4 water_color_deep : source_color = vec4(0.08, 0.25, 0.55, 1.0);
+uniform vec4 water_color_mid : source_color = vec4(0.12, 0.35, 0.65, 1.0);
+uniform vec4 water_color_light : source_color = vec4(0.15, 0.42, 0.72, 1.0);
+uniform float wave_speed = 0.3;
+uniform float wave_amplitude = 0.12;
+uniform float wave_frequency = 0.8;
+uniform float color_blend_speed = 0.4;
+
+void vertex() {
+	float wave1 = sin(VERTEX.x * wave_frequency + TIME * wave_speed) * wave_amplitude;
+	float wave2 = sin(VERTEX.z * wave_frequency * 0.7 + TIME * wave_speed * 0.8) * wave_amplitude * 0.5;
+	float wave3 = cos(VERTEX.x * wave_frequency * 0.5 - VERTEX.z * wave_frequency * 0.5 + TIME * wave_speed * 0.6) * wave_amplitude * 0.3;
+	VERTEX.y += wave1 + wave2 + wave3;
+}
+
+void fragment() {
+	vec2 uv = UV * 2.0;
+	
+	float pattern1 = sin(uv.x * 3.0 + TIME * color_blend_speed) * 0.5 + 0.5;
+	float pattern2 = sin(uv.y * 2.5 - TIME * color_blend_speed * 0.7) * 0.5 + 0.5;
+	float pattern3 = cos((uv.x + uv.y) * 2.0 + TIME * color_blend_speed * 0.5) * 0.5 + 0.5;
+	
+	float blend1 = pattern1 * 0.4 + pattern2 * 0.3 + pattern3 * 0.3;
+	float blend2 = pattern2 * 0.4 + pattern3 * 0.4 + pattern1 * 0.2;
+	
+	vec3 color_mix = mix(water_color_deep.rgb, water_color_mid.rgb, blend1);
+	color_mix = mix(color_mix, water_color_light.rgb, blend2 * 0.5);
+	
+	ALBEDO = color_mix;
+	ALPHA = 1.0;
+	ROUGHNESS = 0.3;
+	SPECULAR = 0.5;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+render_priority = 0
+shader = SubResource("Shader_1")
+shader_parameter/water_color_deep = Color(0.08, 0.25, 0.55, 1)
+shader_parameter/water_color_mid = Color(0.12, 0.35, 0.65, 1)
+shader_parameter/water_color_light = Color(0.15, 0.42, 0.72, 1)
+shader_parameter/wave_speed = 0.3
+shader_parameter/wave_amplitude = 0.12
+shader_parameter/wave_frequency = 0.8
+shader_parameter/color_blend_speed = 0.4
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2"]
+size = Vector2(33.33, 33.33)
+subdivide_width = 24
+subdivide_depth = 24
+
+[sub_resource type="Shader" id="Shader_2"]
+code = "shader_type spatial;
+render_mode blend_add, depth_draw_opaque, cull_back, unshaded;
+
+uniform vec4 foam_color_bright : source_color = vec4(0.7, 0.85, 0.95, 1.0);
+uniform vec4 foam_color_soft : source_color = vec4(0.4, 0.6, 0.75, 1.0);
+uniform float foam_speed = 0.15;
+uniform float foam_scale = 4.0;
+uniform float foam_intensity = 0.25;
+
+void fragment() {
+	vec2 uv = UV * foam_scale;
+	
+	vec2 uv1 = uv + vec2(TIME * foam_speed * 0.3, TIME * foam_speed * 0.2);
+	vec2 uv2 = uv - vec2(TIME * foam_speed * 0.2, TIME * foam_speed * 0.4);
+	vec2 uv3 = uv + vec2(TIME * foam_speed * 0.1, -TIME * foam_speed * 0.15);
+	
+	float foam_pattern1 = sin(uv1.x * 5.0) * cos(uv1.y * 4.0);
+	float foam_pattern2 = sin(uv2.x * 3.5) * cos(uv2.y * 6.0);
+	float foam_pattern3 = sin(uv3.x * 4.5) * sin(uv3.y * 3.5);
+	
+	float foam_noise = (foam_pattern1 + foam_pattern2 + foam_pattern3) * 0.33;
+	foam_noise = smoothstep(0.3, 0.8, foam_noise);
+	
+	vec3 foam_color = mix(foam_color_soft.rgb, foam_color_bright.rgb, foam_noise);
+	
+	float final_alpha = foam_noise * foam_intensity;
+	
+	ALBEDO = foam_color;
+	ALPHA = final_alpha;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2"]
+render_priority = 1
+shader = SubResource("Shader_2")
+shader_parameter/foam_color_bright = Color(0.7, 0.85, 0.95, 1)
+shader_parameter/foam_color_soft = Color(0.4, 0.6, 0.75, 1)
+shader_parameter/foam_speed = 0.15
+shader_parameter/foam_scale = 4.0
+shader_parameter/foam_intensity = 0.25
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+radius = 0.27
+height = 0.53
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(1, 0.8, 0.2, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1"]
+radius = 0.27
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4"]
+albedo_color = Color(1, 0.5, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.8, 0.2, 0.2, 1)
+
+[node name="LevelSelectIsland" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 5, 5.8739376)
+fov = 50.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 3.33, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="PlayerStart" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.67, 2.67)
+
+[node name="Island" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Island"]
+mesh = SubResource("CylinderMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Island"]
+shape = SubResource("CylinderShape3D_1")
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.33, 0)
+mesh = SubResource("PlaneMesh_1")
+surface_material_override/0 = SubResource("ShaderMaterial_1")
+
+[node name="WaterFoam" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28, 0)
+mesh = SubResource("PlaneMesh_2")
+surface_material_override/0 = SubResource("ShaderMaterial_2")
+
+[node name="LevelPoint1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33, 0.83, 0.67)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelPoint1"]
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_3")
+
+[node name="Area3D" type="Area3D" parent="LevelPoint1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelPoint1/Area3D"]
+shape = SubResource("SphereShape3D_1")
+
+[node name="LevelPoint2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33, 0.83, 0.67)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelPoint2"]
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_4")
+
+[node name="Area3D" type="Area3D" parent="LevelPoint2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelPoint2/Area3D"]
+shape = SubResource("SphereShape3D_1")
+
+[node name="LevelPoint3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83, -1.33)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LevelPoint3"]
+mesh = SubResource("SphereMesh_1")
+surface_material_override/0 = SubResource("StandardMaterial3D_5")
+
+[node name="Area3D" type="Area3D" parent="LevelPoint3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelPoint3/Area3D"]
+shape = SubResource("SphereShape3D_1")

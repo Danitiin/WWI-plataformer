@@ -17,8 +17,9 @@ height = 5.0
 radial_segments = 32
 rings = 16
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_island"]
-radius = 5.0
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_platform"]
+height = 0.2
+radius = 6.6220703
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_water"]
 texture_filter = 0
@@ -43,27 +44,29 @@ material_override = SubResource("StandardMaterial3D_ly1dc")
 mesh = SubResource("SphereMesh_island")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("SphereShape3D_island")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2744646, 5.3954735)
+shape = SubResource("CylinderShape3D_platform")
 
 [node name="PlayerSelector3D" parent="." instance=ExtResource("2_ir4c6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 10, 20)
 fov = 15.0
 
 [node name="Portal1" parent="." instance=ExtResource("2_es1pc")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.15339871, -0.20000005, -3.6337934)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.184015, 0.34099805, -0.21172118)
 level_id = 0
 
 [node name="Portal2" parent="." instance=ExtResource("2_es1pc")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.3918104, -0.2522421, -4.852653)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.8019753, 0.25824332, -0.054864883)
 level_id = 1
+level_name = "Nivel 2"
 
 [node name="Portal3" parent="." instance=ExtResource("2_es1pc")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.1945076, -0.20000005, -5.711325)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.3505285, 0.20968467, -0.72569954)
 level_id = 2
+level_name = "Nivel 3"
 
 [node name="Water" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2093949, 0)
