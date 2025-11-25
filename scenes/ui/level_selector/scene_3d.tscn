@@ -1,9 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://cg721vsib53hd"]
+[gd_scene load_steps=26 format=3 uid="uid://cg721vsib53hd"]
 
 [ext_resource type="PackedScene" uid="uid://bqnevuk8j6l8e" path="res://scenes/player/player_selector_3d.tscn" id="1_jaca1"]
 [ext_resource type="PackedScene" uid="uid://batkcp513waqy" path="res://scenes/ui/level_selector/portal_base.tscn" id="1_portal"]
 [ext_resource type="Script" uid="uid://iob8is6lwuw6" path="res://scenes/ui/level_selector/scene_3d.gd" id="1_qbslv"]
 [ext_resource type="PackedScene" uid="uid://s4joiixvs22j" path="res://scenes/ui/pause_menu/pause_menu.tscn" id="4_21vc4"]
+[ext_resource type="PackedScene" uid="uid://266awlb6oxi4" path="res://scenes/ui/level_selector/portal_sign.tscn" id="5_sign"]
+[ext_resource type="AudioStream" uid="uid://d17cqtfxmfvxo" path="res://assets/audio/music/level_selector_music.mp3" id="6_te542"]
 
 [sub_resource type="Environment" id="Environment_1"]
 background_mode = 1
@@ -375,16 +377,29 @@ surface_material_override/0 = SubResource("ShaderMaterial_2")
 [node name="Portales" type="Node3D" parent="."]
 
 [node name="Portal1" parent="Portales" instance=ExtResource("1_portal")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33, 0.83, 0.67)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.33, 0.83, 0.67)
 level_id = 0
 
+[node name="Sign" parent="Portales/Portal1" instance=ExtResource("5_sign")]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 1.5, 0)
+
 [node name="Portal2" parent="Portales" instance=ExtResource("1_portal")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33, 0.83, 0.67)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.33, 0.83, 0.67)
 level_id = 1
 
+[node name="Sign" parent="Portales/Portal2" instance=ExtResource("5_sign")]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 1.5, 0)
+
 [node name="Portal3" parent="Portales" instance=ExtResource("1_portal")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83, -1.33)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.06262565, 0.746285, -1.0649728)
 level_id = 2
+
+[node name="Sign" parent="Portales/Portal3" instance=ExtResource("5_sign")]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 1.5, 0)
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_21vc4")]
 visible = false
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_te542")
+autoplay = true

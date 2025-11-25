@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://266awlb6oxi4"]
+
+[ext_resource type="Script" uid="uid://02k4cnyplrej" path="res://scenes/ui/level_selector/portal_sign.gd" id="1_b7nko"]
+[ext_resource type="Texture2D" uid="uid://deebsankyubq1" path="res://assets/items/gems/Blue Diamond/collectible_empty.png" id="1_dqdpd"]
+[ext_resource type="Texture2D" uid="uid://cxr6kj4oitcsc" path="res://assets/ui/hud/icons/check_level.png" id="1_jt4qp"]
+[ext_resource type="Texture2D" uid="uid://kqhv311lcl2a" path="res://assets/items/gems/Blue Diamond/collectible_filled.png" id="2_jt4qp"]
+
+[node name="PortalSign" type="Node3D"]
+transform = Transform3D(1.2, 0, 0, 0, 1.1999998, 0, 0, 0, 1.1999998, 0, 0, 0)
+script = ExtResource("1_b7nko")
+
+[node name="Background" type="Sprite3D" parent="."]
+texture_filter = 0
+
+[node name="LevelLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.01)
+pixel_size = 0.01
+texture_filter = 0
+text = "Nivel 1"
+
+[node name="Checkmark" type="Sprite3D" parent="."]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0.7460424, 0.2815085, -0.006254485)
+visible = false
+texture_filter = 0
+texture = ExtResource("1_jt4qp")
+
+[node name="DiamondsEmptys" type="Node3D" parent="."]
+
+[node name="Diamond1Empty" type="Sprite3D" parent="DiamondsEmptys"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.257, -0.22, 0)
+texture_filter = 0
+texture = ExtResource("1_dqdpd")
+
+[node name="Diamond2Empty" type="Sprite3D" parent="DiamondsEmptys"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.193, -0.22, 0)
+texture_filter = 0
+texture = ExtResource("1_dqdpd")
+
+[node name="Diamond3Empty" type="Sprite3D" parent="DiamondsEmptys"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.643, -0.22, 0)
+texture_filter = 0
+texture = ExtResource("1_dqdpd")
+
+[node name="DiamondsFilled" type="Node3D" parent="."]
+
+[node name="Diamond1Filled" type="Sprite3D" parent="DiamondsFilled"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.257, -0.22, 0)
+visible = false
+texture_filter = 0
+texture = ExtResource("2_jt4qp")
+
+[node name="Diamond2Filled" type="Sprite3D" parent="DiamondsFilled"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.193, -0.22, 0)
+visible = false
+texture_filter = 0
+texture = ExtResource("2_jt4qp")
+
+[node name="Diamond3Filled" type="Sprite3D" parent="DiamondsFilled"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.643, -0.22, 0)
+visible = false
+texture_filter = 0
+texture = ExtResource("2_jt4qp")
