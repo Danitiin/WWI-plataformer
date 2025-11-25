@@ -17,6 +17,11 @@ func _ready():
 
 	restore_checkpoint_if_exits()
 
+	# Si hay checkpoint activo, mover al player ahí
+	if has_active_checkpoint:
+		player.global_position = active_checkpoint_position
+		print("Player spawneado en checkpoint: ", active_checkpoint_position)
+
 	if level_data:
 		hide_collected_items()
 
@@ -65,14 +70,6 @@ func reactivate_checkpoint_visual(checkpoint_position: Vector2):
 			break
 
 func respawn_player():
-	if not player:
-		return
-		
-	var respawn_position = player_spawn_position
-	if has_active_checkpoint:
-		respawn_position = active_checkpoint_position
-
-	print("Respawneando player en: ", respawn_position)
-		
-	if player.has_method("respawn"):
-		player.respawn(respawn_position)
+	# Recargar la escena completa para que reaparezcan las monedas
+	# Los diamantes no reaparecen porque hide_collected_items() los destruye
+	get_tree().reload_current_scene()

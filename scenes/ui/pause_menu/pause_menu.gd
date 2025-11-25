@@ -85,5 +85,9 @@ func _on_options_closed():
 	show()
 
 func _on_main_menu_pressed():
+	#Borrar checkpoint del nivel actual al salir sin completar
+	if GameManager.current_level >= 0:
+		GameManager.level_checkpoints.erase(GameManager.current_level)
+
 	get_tree().paused = false
 	GameManager.return_to_main_menu()
