@@ -34,7 +34,7 @@ func load_game():
 	collected_items = save_dict.get("collected_items", {})
 	
 func add_collectible(level_id: int, collectible_id: int):
-	if not collected_items.has(level_id):
+	if level_id not in collected_items:
 		collected_items[level_id] = []
 		
 	if collectible_id not in collected_items[level_id]:
@@ -42,19 +42,14 @@ func add_collectible(level_id: int, collectible_id: int):
 		save_game()
 
 func get_collected_count(level_id: int):
-	if collected_items.has(level_id):
+	if level_id in collected_items:
 		return collected_items[level_id].size()
 	return 0
 
 func is_collectible_collected(level_id: int, collectible_id: int) -> bool:
-	if collected_items.has(level_id):
+	if level_id in collected_items:
 		return collectible_id in collected_items[level_id]
 	return false
-
-func get_collected_for_level(level_id: int) -> Array:
-	if collected_items.has(level_id):
-		return collected_items[level_id]
-	return []
 
 func is_level_completed(level_id: int) -> bool:
 	return level_id in completed_levels

@@ -357,8 +357,10 @@ func collect_item(collectible: Collectible):
 	if PlayerData.is_collectible_collected(GameManager.current_level, collectible_id):
 		return
 
-	PlayerData.add_collectible(GameManager.current_level, collectible_id)
-	print("Coleccionable recogido: %s" % collectible_id)
+	if collectible_id not in GameManager.temp_collected_items:
+		GameManager.temp_collected_items.append(collectible_id)
+
+	print("Coleccionable recogido (temporalmente): %s" % collectible_id)
 
 	# Llamar al método collect() dl coleccionable para que se destruya
 	if collectible.has_method("collect"):
@@ -463,8 +465,6 @@ func die():
 		level.respawn_player()
 	else:
 		_show_game_over()
-
-	
 
 func respawn(spawn_position: Vector2):
 	is_dead = false

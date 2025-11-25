@@ -1,20 +1,19 @@
-# Area2D invisible para que se detecte cuando el jugador llega al final del nievl.
-extends Collectible
+# Area2D invisible para que se detecte cuando el jugador llega al final del nivel.
+extends Area2D
 
-func collect():
-	super.collect()
+func _ready():
+	body_entered.connect(_on_body_entered)
 
-	# gmanager se entera de que se completo el nivel
+func _on_body_entered(body):
+	if not body.is_in_group("player"):
+		return
+
+	# Guardar coleccionables y completar nivel
 	GameManager.complete_level()
 
-	# Temporizador pa no volver al mapa de seguido
-	var timer = get_tree().create_timer(1.5)
-	timer.timeout.connect(on_level_end_timer_timeout)
-
-func on_level_end_timer_timeout():
-	#Cuando se reinicia un nivel, si hay un checkpoint activado este se borra
+	# Borrar checkpoint del nivel actual
 	if GameManager.current_level >= 0:
 		GameManager.level_checkpoints.erase(GameManager.current_level)
 
-	# Vuelve al mapa
+	# Volver al mapilla
 	GameManager.return_to_level_selector()

@@ -7,6 +7,7 @@ var all_abilities: Array[String] = ["Dash", "DoubleJump", "GroundPound"]
 var current_level: int = -1
 var current_level_ablities: Array[String] = []
 var level_checkpoints: Dictionary = {}
+var temp_collected_items: Array[int] = []
 
 func _ready():
 	load_levels()
@@ -21,6 +22,8 @@ func load_levels():
 
 func load_level(level_id: int):
 	current_level = level_id
+
+	temp_collected_items.clear()
 
 	#limpiar checkp
 	clear_other_level_checkpoints(level_id)
@@ -46,6 +49,11 @@ func complete_level():
 
 	if current_level < 0 or current_level >= levels.size():
 		return
+
+	for collectible_id in temp_collected_items:
+		PlayerData.add_collectible(current_level, collectible_id)
+
+	temp_collected_items.clear()
 
 	if current_level not in PlayerData.completed_levels:
 		PlayerData.completed_levels.append(current_level)
