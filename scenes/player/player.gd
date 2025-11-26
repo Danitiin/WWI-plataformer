@@ -15,7 +15,7 @@ signal player_died
 @export var air_friction: float = 100.0
 @export var air_turn_acceleration: float = 1200.0
 
-const max_gravity_multiplier: float = 1.0
+const max_gravity_multiplier: float = 0.4
 const anticipation_duration: float = 0.08
 const landing_duration: float = 0.15
 
