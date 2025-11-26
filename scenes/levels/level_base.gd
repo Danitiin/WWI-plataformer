@@ -43,7 +43,10 @@ func hide_collected_items():
 
 	for collectible in collectibles:
 		if collectible.collectible_id != null:
+			#quitar si esta guardado permanentemente
 			if PlayerData.is_collectible_collected(level_data.level_id, collectible.collectible_id):
+				collectible.queue_free()
+			elif collectible.collectible_id in GameManager.temp_collected_items:
 				collectible.queue_free()
 
 func activate_checkpoint(checkpoint_position: Vector2):
@@ -52,6 +55,7 @@ func activate_checkpoint(checkpoint_position: Vector2):
 
 	if level_data:
 		GameManager.level_checkpoints[level_data.level_id] = checkpoint_position
+		GameManager.save_checkpoint_collectibles(level_data.level_id)
 		print("Checkpoint guardado para el nivel: ", level_data.level_id)
 
 	desactivate_other_checkpoints(checkpoint_position)
@@ -70,6 +74,8 @@ func reactivate_checkpoint_visual(checkpoint_position: Vector2):
 			break
 
 func respawn_player():
+	if level_data:
+		GameManager.restore_checkpoint_collectibles(level_data.level_id)
 	# Recargar la escena completa para que reaparezcan las monedas
 	# Los diamantes no reaparecen porque hide_collected_items() los destruye
 	get_tree().reload_current_scene()

@@ -657,7 +657,7 @@ collectible_id = 2
 visible = false
 
 [node name="Checkpoint" parent="." instance=ExtResource("9_nt34b")]
-position = Vector2(1590, 44)
+position = Vector2(3529, 71)
 
 [node name="Hud" parent="." instance=ExtResource("10_7f7yp")]
 

@@ -7,6 +7,7 @@ var all_abilities: Array[String] = ["Dash", "DoubleJump", "GroundPound"]
 var current_level: int = -1
 var current_level_ablities: Array[String] = []
 var level_checkpoints: Dictionary = {}
+var checkpoint_collected_items: Dictionary = {}
 var temp_collected_items: Array[int] = []
 
 func _ready():
@@ -24,6 +25,7 @@ func load_level(level_id: int):
 	current_level = level_id
 
 	temp_collected_items.clear()
+	checkpoint_collected_items.clear()
 
 	#limpiar checkp
 	clear_other_level_checkpoints(level_id)
@@ -82,6 +84,20 @@ func clear_other_level_checkpoints(keep_level_id: int):
 
 	for key in keys_to_remove:
 		level_checkpoints.erase(key)
+		checkpoint_collected_items.erase(key)
 
 	if keys_to_remove.size() > 0:
 		print("Checkp limpiados", keys_to_remove)
+
+func save_checkpoint_collectibles(level_id: int):
+
+	checkpoint_collected_items[level_id] = temp_collected_items.duplicate()
+	print("Coleccionables guardados en checkpoint: ", checkpoint_collected_items[level_id])
+
+func restore_checkpoint_collectibles(level_id: int):
+	
+	if level_id in checkpoint_collected_items:
+		temp_collected_items = checkpoint_collected_items[level_id].duplicate()
+		print("Coleccionables restaurados del checkpoint: ", temp_collected_items)
+	else:
+		temp_collected_items.clear()
