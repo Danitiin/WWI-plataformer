@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://c14ewh5k2uubu"]
+
+[node name="ItemDoubleJump" type="Area2D"]

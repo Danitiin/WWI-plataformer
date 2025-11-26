@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://duhuoec6an78l"]
+
+[node name="ItemDash" type="Area2D"]

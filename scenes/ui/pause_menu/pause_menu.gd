@@ -68,6 +68,8 @@ func _on_restart_pressed():
 
 	if GameManager.current_level >= 0:
 		GameManager.level_checkpoints.erase(GameManager.current_level)
+		GameManager.checkpoint_collected_items.erase(GameManager.current_level)
+		GameManager.temp_collected_items.clear()
 
 	get_tree().paused = false
 	get_tree().reload_current_scene()
@@ -88,6 +90,8 @@ func _on_main_menu_pressed():
 	#Borrar checkpoint del nivel actual al salir sin completar
 	if GameManager.current_level >= 0:
 		GameManager.level_checkpoints.erase(GameManager.current_level)
+		GameManager.checkpoint_collected_items.erase(GameManager.current_level)
+		GameManager.temp_collected_items.clear()
 
 	get_tree().paused = false
 	GameManager.return_to_main_menu()
