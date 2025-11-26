@@ -27,5 +27,6 @@ collectible_id = 2
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 
 [node name="PauseMenu" parent="." instance=ExtResource("3_pause")]
+visible = false
 
 [node name="Hud" parent="." instance=ExtResource("5_4vxwg")]

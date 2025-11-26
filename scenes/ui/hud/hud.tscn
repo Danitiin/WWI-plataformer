@@ -16,26 +16,39 @@ offset_bottom = 50.0
 
 [node name="DiamondContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = -15
 
 [node name="Diamond1" type="TextureRect" parent="VBoxContainer/DiamondContainer"]
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Diamond2" type="TextureRect" parent="VBoxContainer/DiamondContainer"]
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Diamond3" type="TextureRect" parent="VBoxContainer/DiamondContainer"]
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="CoinContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 4
 
 [node name="CoinIcon" type="TextureRect" parent="VBoxContainer/CoinContainer"]
+custom_minimum_size = Vector2(32, 32)
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("4_ax4tw")
-expand_mode = 2
-stretch_mode = 4
+expand_mode = 1
+stretch_mode = 5
 
 [node name="CoinLabel" type="Label" parent="VBoxContainer/CoinContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "x 00"

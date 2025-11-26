@@ -75,9 +75,17 @@ var is_hit: bool = false
 @export var stomp_bounce_force: float = -250.0
 @export var stomp_damage: int = 1
 
+#Camara look-ahead
+@export_group("Camara")
+@export var camera_look_ahead: float = 60.0
+@export var camera_smooth_speed: float = 0.5
+@export var camera_move_threshold: float = 10.0
+
 #Sprite del player
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurt_box: Area2D = $HurtBox
+
+@onready var camera: Camera2D = $Camera2D
 
 func _ready():
 	add_to_group("player")
@@ -124,6 +132,7 @@ func _physics_process(delta: float):
 	handle_horizontal_movement(delta)
 	attempt_corner_correction()
 	update_animation()
+	update_camera_offset(delta)
 	update_spin_visual(delta)
 	move_and_slide()
 
@@ -552,3 +561,13 @@ func stomp_enemy(enemy: Node2D):
 	can_spin = true
 	if is_spinning:
 		end_spin()
+
+func update_camera_offset(delta: float):
+	if not camera:
+		return
+
+	#Solo mover camara si el jugador se mueve
+	if abs(velocity.x) > camera_move_threshold:
+		var target_offset_x = camera_look_ahead if animated_sprite.flip_h else -camera_look_ahead
+		camera.offset.x = lerp(camera.offset.x, target_offset_x, camera_smooth_speed * delta)
+	# Si está quieto, mantener la vista de la ca,mara
