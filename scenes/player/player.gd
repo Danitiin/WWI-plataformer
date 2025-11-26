@@ -488,8 +488,9 @@ func respawn(spawn_position: Vector2):
 	for ability in abilities:
 		if "dash_timer" in ability:
 			ability.dash_timer = 0.0
-		if "is_pounding" in ability:
-			ability.is_pounding = false
+		if "is_gliding" in ability:
+			ability.is_gliding = false
+			ability.cooldown_timer = 0.0
 		if "has_double_jumped" in ability:
 			ability.has_double_jumped = false
 		if "cooldown_timer" in ability:

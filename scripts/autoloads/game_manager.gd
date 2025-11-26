@@ -3,7 +3,7 @@ extends Node
 signal level_completed(level_id: int)
 
 var levels: Array[LevelData] = []
-var all_abilities: Array[String] = ["Dash", "DoubleJump", "GroundPound"]
+var all_abilities: Array[String] = ["Dash", "DoubleJump", "Glide"]
 var current_level: int = -1
 var current_level_ablities: Array[String] = []
 var level_checkpoints: Dictionary = {}

@@ -7,5 +7,5 @@ script = ExtResource("1_w00km")
 level_id = 2
 level_name = "Nivel 3"
 scene_path = "res://scenes/levels/level_03/level_03.tscn"
-abilities_in_level = Array[String](["GroundPound"])
+abilities_in_level = Array[String](["Glide"])
 metadata/_custom_type_script = "uid://cqjw043440syq"
