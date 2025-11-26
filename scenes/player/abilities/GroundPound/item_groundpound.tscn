@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://dxioj8sralawx"]
+
+[ext_resource type="Texture2D" uid="uid://beyq8wivvf3c7" path="res://assets/items/collectibles/Green Bottle/01.png" id="1_s1tff"]
+[ext_resource type="Texture2D" uid="uid://c0dacsrlmsukx" path="res://assets/items/collectibles/Green Bottle/02.png" id="2_2fdq8"]
+[ext_resource type="Texture2D" uid="uid://dirc1ml1jwv46" path="res://assets/items/collectibles/Green Bottle/03.png" id="3_cfj41"]
+[ext_resource type="Texture2D" uid="uid://dkkljjhhidpn1" path="res://assets/items/collectibles/Green Bottle/04.png" id="4_8cjb5"]
+[ext_resource type="Texture2D" uid="uid://btmmq53q6hrue" path="res://assets/items/collectibles/Green Bottle/05.png" id="5_wbkmt"]
+[ext_resource type="Texture2D" uid="uid://dlaenm46dn4wb" path="res://assets/items/collectibles/Green Bottle/06.png" id="6_utl3g"]
+[ext_resource type="Texture2D" uid="uid://cttay5f2irar3" path="res://assets/items/collectibles/Green Bottle/07.png" id="7_50jjm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5y7c4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_s1tff")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2fdq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cfj41")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8cjb5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wbkmt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_utl3g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_50jjm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6dmp8"]
+
+[node name="ItemGroundpound" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5y7c4")
+frame_progress = 0.516592
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6dmp8")

@@ -1,3 +1,50 @@
-[gd_scene format=3 uid="uid://duhuoec6an78l"]
+[gd_scene load_steps=10 format=3 uid="uid://duhuoec6an78l"]
+
+[ext_resource type="Texture2D" uid="uid://b7uthepxm3pbl" path="res://assets/items/collectibles/Blue Potion/01.png" id="1_xp0r2"]
+[ext_resource type="Texture2D" uid="uid://bgen2telwr6v8" path="res://assets/items/collectibles/Blue Potion/02.png" id="2_cshym"]
+[ext_resource type="Texture2D" uid="uid://ucjdo7f5s05d" path="res://assets/items/collectibles/Blue Potion/03.png" id="3_kw1hr"]
+[ext_resource type="Texture2D" uid="uid://bnf7nl0tqsluv" path="res://assets/items/collectibles/Blue Potion/04.png" id="4_uvosf"]
+[ext_resource type="Texture2D" uid="uid://dme56cy37jw74" path="res://assets/items/collectibles/Blue Potion/05.png" id="5_rlo6p"]
+[ext_resource type="Texture2D" uid="uid://cjrfnela1csx8" path="res://assets/items/collectibles/Blue Potion/06.png" id="6_rvvci"]
+[ext_resource type="Texture2D" uid="uid://b8bg4fk3oaxyc" path="res://assets/items/collectibles/Blue Potion/07.png" id="7_pgwqy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nawx5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xp0r2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_cshym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kw1hr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uvosf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rlo6p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rvvci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pgwqy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ey4ru"]
 
 [node name="ItemDash" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nawx5")
+animation = &"idle"
+frame_progress = 0.59353226
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ey4ru")
