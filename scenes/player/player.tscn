@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://crojd4pydu8k3"]
+[gd_scene load_steps=52 format=3 uid="uid://crojd4pydu8k3"]
 
 [ext_resource type="Script" uid="uid://bv7r2px0kqnki" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://q04lwrqoqmtx" path="res://assets/characters/player/Pink Star/01-Idle/Idle 01.png" id="2_dovo2"]
@@ -35,8 +35,11 @@
 [ext_resource type="Texture2D" uid="uid://pjail5d4u61f" path="res://assets/characters/player/Pink Star/08-Hit/Hit 03.png" id="19_ahqnk"]
 [ext_resource type="Texture2D" uid="uid://sxsrmjt3pp5" path="res://assets/characters/player/Pink Star/08-Hit/Hit 04.png" id="20_vb1ce"]
 [ext_resource type="Texture2D" uid="uid://4j06svjw0vvh" path="res://assets/characters/player/Pink Star/01-Idle/Idle 02.png" id="21_0ncpa"]
+[ext_resource type="Texture2D" uid="uid://dm8ok1y7cr5d2" path="res://assets/characters/player/abilities/01-Glide/Glide-01.png" id="22_iwuka"]
 [ext_resource type="Texture2D" uid="uid://cqk8aepggswag" path="res://assets/characters/player/Pink Star/01-Idle/Idle 03.png" id="22_upxxc"]
+[ext_resource type="Texture2D" uid="uid://bv4bhewoxuhlr" path="res://assets/characters/player/abilities/01-Glide/Glide-02.png" id="23_ds1xl"]
 [ext_resource type="Texture2D" uid="uid://behnlj6gbmpi1" path="res://assets/characters/player/Pink Star/01-Idle/Idle 04.png" id="23_ln3h3"]
+[ext_resource type="Texture2D" uid="uid://bxjviijn7y4sg" path="res://assets/characters/player/abilities/01-Glide/Glide-03.png" id="24_1u1sw"]
 [ext_resource type="Texture2D" uid="uid://c0h2rxll71oru" path="res://assets/characters/player/Pink Star/01-Idle/Idle 05.png" id="24_uygh0"]
 [ext_resource type="Texture2D" uid="uid://deifusyw74o4s" path="res://assets/characters/player/Pink Star/01-Idle/Idle 06.png" id="25_t1aof"]
 [ext_resource type="Texture2D" uid="uid://33fqcauqsiws" path="res://assets/characters/player/Pink Star/01-Idle/Idle 07.png" id="26_w8qe1"]
@@ -137,6 +140,20 @@ animations = [{
 "loop": true,
 "name": &"fall",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_iwuka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_ds1xl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_1u1sw")
+}],
+"loop": true,
+"name": &"glide",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -255,8 +272,7 @@ jump_velocity = -360.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ugbui")
-animation = &"Dash"
-frame_progress = 0.9861082
+animation = &"glide"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)

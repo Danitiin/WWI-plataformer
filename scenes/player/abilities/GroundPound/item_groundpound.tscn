@@ -33,7 +33,7 @@ animations = [{
 "texture": ExtResource("7_50jjm")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
 }]
 
@@ -43,7 +43,7 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5y7c4")
-frame_progress = 0.516592
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6dmp8")

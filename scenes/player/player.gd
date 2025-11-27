@@ -363,13 +363,21 @@ func has_ability(ability_name: String) -> bool:
 func collect_item(collectible: Collectible):
 	var collectible_id = collectible.collectible_id
 
+	print("RECOGIENDO COLECCIONABLE")
+	print("Collectible ID: ", collectible_id)
+	print("Ya está en PlayerData? ", PlayerData.is_collectible_collected(GameManager.current_level, collectible_id))
+
 	if PlayerData.is_collectible_collected(GameManager.current_level, collectible_id):
+		print("YA ESTABA GUARDADO PERMANENTEMENTE, ignorando")
 		return
+
+	print("Ya está en temp_collected_items? ", collectible_id in GameManager.temp_collected_items)
 
 	if collectible_id not in GameManager.temp_collected_items:
 		GameManager.temp_collected_items.append(collectible_id)
+		print("AÑADIDO a temp_collected_items")
 
-	print("Coleccionable recogido (temporalmente): %s" % collectible_id)
+	print("temp_collected_items ahora: ", GameManager.temp_collected_items)
 
 	# Llamar al método collect() dl coleccionable para que se destruya
 	if collectible.has_method("collect"):

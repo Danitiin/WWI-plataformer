@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c14ewh5k2uubu"]
+[gd_scene load_steps=11 format=3 uid="uid://c14ewh5k2uubu"]
 
 [ext_resource type="Texture2D" uid="uid://dvlhajm4114lg" path="res://assets/items/collectibles/Red Potion/01.png" id="1_84jrr"]
+[ext_resource type="Script" uid="uid://c8tetehwk44in" path="res://scenes/player/abilities/DoubleJump/item_double_jump.gd" id="1_ruac3"]
 [ext_resource type="Texture2D" uid="uid://bntitv57sd62q" path="res://assets/items/collectibles/Red Potion/02.png" id="2_5457k"]
 [ext_resource type="Texture2D" uid="uid://bygcq3bbv5f77" path="res://assets/items/collectibles/Red Potion/03.png" id="3_kaevm"]
 [ext_resource type="Texture2D" uid="uid://l4uu13debqoo" path="res://assets/items/collectibles/Red Potion/04.png" id="4_pjgvo"]
@@ -35,15 +36,16 @@ animations = [{
 "texture": ExtResource("7_nka6k")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
 }]
 
 [node name="ItemDoubleJump" type="Area2D"]
+script = ExtResource("1_ruac3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_oatr1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_v31si")
-frame_progress = 0.09607987
+animation = &"idle"

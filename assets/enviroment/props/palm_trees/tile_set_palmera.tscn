@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdrq670txpyx7"]
+
+[ext_resource type="Texture2D" uid="uid://25kwc8gim4uj" path="res://assets/enviroment/props/palm_trees/Front Palm Trees/Front Palm Tree Top 01.png" id="1_rdf75"]
+[ext_resource type="Script" uid="uid://cs04vm6ivci6l" path="res://assets/enviroment/props/palm_trees/tile_set_palmera.gd" id="1_ytwep"]
+[ext_resource type="Texture2D" uid="uid://dvl653v7t782y" path="res://assets/enviroment/props/palm_trees/Front Palm Trees/Front Palm Tree Top 02.png" id="2_ytwep"]
+[ext_resource type="Texture2D" uid="uid://c6ff2ptlcceos" path="res://assets/enviroment/props/palm_trees/Front Palm Trees/Front Palm Tree Top 03.png" id="3_0yele"]
+[ext_resource type="Texture2D" uid="uid://csxia1wo3eeqs" path="res://assets/enviroment/props/palm_trees/Front Palm Trees/Front Palm Tree Top 04.png" id="4_ok3e5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eew0m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rdf75")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ytwep")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0yele")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ok3e5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdf75"]
+size = Vector2(32, 17)
+
+[node name="TileSetPalmera" type="StaticBody2D"]
+collision_layer = 4
+script = ExtResource("1_ytwep")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_eew0m")
+animation = &"idle"
+frame_progress = 0.7981405
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_rdf75")

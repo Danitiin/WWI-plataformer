@@ -52,13 +52,20 @@ func complete_level():
 	if current_level < 0 or current_level >= levels.size():
 		return
 
+	print("COMPLETANDO NIVEL ", current_level)
+	print("Coleccionables temporales a guardar: ", temp_collected_items)
+
 	for collectible_id in temp_collected_items:
 		PlayerData.add_collectible(current_level, collectible_id)
+		print("Guardado coleccionable ID: ", collectible_id)
 
 	temp_collected_items.clear()
 
 	if current_level not in PlayerData.completed_levels:
 		PlayerData.completed_levels.append(current_level)
+
+	print("Coleccionables guardados en PlayerData para nivel ", current_level, ": ", PlayerData.get_collected_items_for_level(current_level))
+	print("FIN COMPLETAR NIVEL")
 
 	level_completed.emit(current_level)
 	PlayerData.save_game()
@@ -90,14 +97,22 @@ func clear_other_level_checkpoints(keep_level_id: int):
 		print("Checkp limpiados", keys_to_remove)
 
 func save_checkpoint_collectibles(level_id: int):
-
 	checkpoint_collected_items[level_id] = temp_collected_items.duplicate()
+	print("CHECKPOINT GUARDADO")
+	print("Nivel: ", level_id)
 	print("Coleccionables guardados en checkpoint: ", checkpoint_collected_items[level_id])
+	print("temp_collected_items actual: ", temp_collected_items)
 
 func restore_checkpoint_collectibles(level_id: int):
-	
+	print("RESTAURANDO CHECKPOINT")
+	print("Nivel: ", level_id)
+	print("temp_collected_items antes de restaurar: ", temp_collected_items)
+
 	if level_id in checkpoint_collected_items:
 		temp_collected_items = checkpoint_collected_items[level_id].duplicate()
 		print("Coleccionables restaurados del checkpoint: ", temp_collected_items)
 	else:
 		temp_collected_items.clear()
+		print("No habia checkpoint, temp_collected_items limpiado")
+
+	print("temp_collected_items despues de restaurar: ", temp_collected_items)
