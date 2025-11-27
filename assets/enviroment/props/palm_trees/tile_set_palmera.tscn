@@ -36,8 +36,9 @@ script = ExtResource("1_ytwep")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_eew0m")
 animation = &"idle"
-frame_progress = 0.7981405
+frame_progress = 0.32565182
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6.5)
 shape = SubResource("RectangleShape2D_rdf75")
+one_way_collision = true
