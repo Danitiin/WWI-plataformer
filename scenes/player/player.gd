@@ -59,6 +59,9 @@ var abilities: Array[AbilityBase] = []
 var current_ability_index: int = 0
 var ability_in_control: bool = false
 
+#Habilidades desbloqueadas temporalmente en este nivel
+var unlocked_abilities: Dictionary = {}
+
 #Sistema de vida
 @export_group("Sistema de vida")
 @export var max_health: int = 3
@@ -99,7 +102,10 @@ func _ready():
 func load_level_ability():
 	var level_ability_names = GameManager.get_level_abilities()
 
+	#empezar con las habilidades bloqueadas
+	unlocked_abilities.clear()
 	for ability_name in level_ability_names:
+		unlocked_abilities[ability_name] = false
 		add_ability(ability_name)
 
 func add_ability(ability_name: String):
@@ -317,8 +323,14 @@ func handle_abilities(delta: float):
 	if abilities.is_empty():
 		ability_in_control = false
 		return
-	
+
 	var selected_ability = abilities[current_ability_index]
+
+	#Ver si está desbloqueada
+	if not unlocked_abilities.get(selected_ability.name, false):
+		ability_in_control = false
+		return
+
 	ability_in_control = selected_ability.physics_update(delta)
 
 func cycle_ability():
@@ -347,7 +359,10 @@ func _unhandled_input(event):
 
 	if not abilities.is_empty() and event.is_action_pressed("ability_action"):
 		var selected_ability = abilities[current_ability_index]
-		selected_ability.activate()
+
+		#Ver si esta desbloqueada
+		if unlocked_abilities.get(selected_ability.name, false):
+			selected_ability.activate()
 
 func get_current_ability() -> AbilityBase:
 	if abilities.is_empty():
@@ -580,3 +595,20 @@ func update_camera_offset(delta: float):
 		var target_offset_x = camera_look_ahead if animated_sprite.flip_h else -camera_look_ahead
 		camera.offset.x = lerp(camera.offset.x, target_offset_x, camera_smooth_speed * delta)
 	# Si está quieto, mantener la vista de la ca,mara
+
+#Gestión de habilidades temporales
+func unlock_temp_ability(ability_name: String):
+	if unlocked_abilities.has(ability_name):
+		unlocked_abilities[ability_name] = true
+		print("Habilidad desbloqueada: ", ability_name)
+
+func clear_temp_abilities():
+	for key in unlocked_abilities.keys():
+		unlocked_abilities[key] = false
+	print("Habilidades bloqueadas")
+
+func get_unlocked_abilities() -> Dictionary:
+	return unlocked_abilities.duplicate()
+
+func restore_unlocked_abilities(abilities_state: Dictionary):
+	unlocked_abilities = abilities_state.duplicate()

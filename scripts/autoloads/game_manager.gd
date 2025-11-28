@@ -8,6 +8,7 @@ var current_level: int = -1
 var current_level_ablities: Array[String] = []
 var level_checkpoints: Dictionary = {}
 var checkpoint_collected_items: Dictionary = {}
+var checkpoint_unlocked_abilities: Dictionary = {}  #Guardar hab del check
 var temp_collected_items: Array[int] = []
 
 const SETTINGS_PATH = "user://settings.cfg"
@@ -123,6 +124,7 @@ func clear_other_level_checkpoints(keep_level_id: int):
 	for key in keys_to_remove:
 		level_checkpoints.erase(key)
 		checkpoint_collected_items.erase(key)
+		checkpoint_unlocked_abilities.erase(key)
 
 	if keys_to_remove.size() > 0:
 		print("Checkp limpiados", keys_to_remove)
@@ -133,6 +135,15 @@ func save_checkpoint_collectibles(level_id: int):
 	print("Nivel: ", level_id)
 	print("Coleccionables guardados en checkpoint: ", checkpoint_collected_items[level_id])
 	print("temp_collected_items actual: ", temp_collected_items)
+
+func save_checkpoint_abilities(level_id: int, abilities: Dictionary):
+	checkpoint_unlocked_abilities[level_id] = abilities.duplicate()
+	print("Habilidades guardadas en checkpoint para nivel ", level_id, ": ", abilities)
+
+func get_checkpoint_abilities(level_id: int) -> Dictionary:
+	if level_id in checkpoint_unlocked_abilities:
+		return checkpoint_unlocked_abilities[level_id].duplicate()
+	return {}
 
 func restore_checkpoint_collectibles(level_id: int):
 	print("RESTAURANDO CHECKPOINT")

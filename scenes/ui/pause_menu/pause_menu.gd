@@ -66,9 +66,15 @@ func _on_resume_pressed():
 func _on_restart_pressed():
 	#Cuando se reinicia un nivel, si hay un checkpoint activado este se borra
 
+	#Quitar habilidades
+	var player = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("clear_temp_abilities"):
+		player.clear_temp_abilities()
+
 	if GameManager.current_level >= 0:
 		GameManager.level_checkpoints.erase(GameManager.current_level)
 		GameManager.checkpoint_collected_items.erase(GameManager.current_level)
+		GameManager.checkpoint_unlocked_abilities.erase(GameManager.current_level)
 		GameManager.temp_collected_items.clear()
 
 	get_tree().paused = false
@@ -87,10 +93,16 @@ func _on_options_closed():
 	show()
 
 func _on_main_menu_pressed():
+	#Quitar habilidades
+	var player = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("clear_temp_abilities"):
+		player.clear_temp_abilities()
+
 	#Borrar checkpoint del nivel actual al salir sin completar
 	if GameManager.current_level >= 0:
 		GameManager.level_checkpoints.erase(GameManager.current_level)
 		GameManager.checkpoint_collected_items.erase(GameManager.current_level)
+		GameManager.checkpoint_unlocked_abilities.erase(GameManager.current_level)
 		GameManager.temp_collected_items.clear()
 
 	get_tree().paused = false

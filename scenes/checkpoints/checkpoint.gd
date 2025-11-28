@@ -12,15 +12,15 @@ func _ready():
 
 func _on_body_entered(body: Node2D):
     if body.is_in_group("player") and not is_activated:
-        activate()
+        activate(body)
 
-func activate():
+func activate(player = null):
     is_activated = true
     print("Checkpoint puesto en: ", global_position)
 
     var level = get_parent()
     if level.has_method("activate_checkpoint"):
-        level.activate_checkpoint(global_position)
+        level.activate_checkpoint(global_position, player)
 
     change_visual()
 

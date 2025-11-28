@@ -5,7 +5,7 @@ class_name LevelBase
 var player_scene = preload("res://scenes/player/player.tscn")
 var player: CharacterBody2D
 var player_spawn_position: Vector2 #Pos inicial del player
-var active_checkpoint_position: Vector2 
+var active_checkpoint_position: Vector2
 var has_active_checkpoint: bool = false
 
 func _ready():
@@ -15,12 +15,27 @@ func _ready():
 	await get_tree().process_frame
 	player_spawn_position = player.global_position
 
+	#quitar habilidades al entrar al nivel
+	if player.has_method("clear_temp_abilities"):
+		player.clear_temp_abilities()
+		print("Habilidades limpiadas al entrar al nivel")
+
 	restore_checkpoint_if_exits()
 
-	# Si hay checkpoint activo, mover al player ahí
+	# Si hay checkpoint activo, mover al player ahí y restaurar habilidades
 	if has_active_checkpoint:
 		player.global_position = active_checkpoint_position
 		print("Player spawneado en checkpoint: ", active_checkpoint_position)
+
+		# Restaurar habilidades desde GameManager
+		if level_data and player.has_method("restore_unlocked_abilities"):
+			var saved_abilities = GameManager.get_checkpoint_abilities(level_data.level_id)
+			print("Habilidades guardadas en GameManager: ", saved_abilities)
+			if not saved_abilities.is_empty():
+				player.restore_unlocked_abilities(saved_abilities)
+				print("Habilidades restauradas desde checkpoint: ", saved_abilities)
+			else:
+				print("NO hay habilidades guardadas en el checkpoint")
 
 	if level_data:
 		hide_collected_items()
@@ -49,13 +64,20 @@ func hide_collected_items():
 			elif collectible.collectible_id in GameManager.temp_collected_items:
 				collectible.queue_free()
 
-func activate_checkpoint(checkpoint_position: Vector2):
+func activate_checkpoint(checkpoint_position: Vector2, player_node = null):
 	active_checkpoint_position = checkpoint_position
 	has_active_checkpoint = true
 
 	if level_data:
 		GameManager.level_checkpoints[level_data.level_id] = checkpoint_position
 		GameManager.save_checkpoint_collectibles(level_data.level_id)
+
+		#Guardar habilidades en GameManager
+		if player_node and player_node.has_method("get_unlocked_abilities"):
+			var abilities = player_node.get_unlocked_abilities()
+			GameManager.save_checkpoint_abilities(level_data.level_id, abilities)
+			print("Checkpoint guardó habilidades del player: ", abilities)
+
 		print("Checkpoint guardado para el nivel: ", level_data.level_id)
 
 	desactivate_other_checkpoints(checkpoint_position)
@@ -70,7 +92,8 @@ func reactivate_checkpoint_visual(checkpoint_position: Vector2):
 	var checkpoints = get_tree().get_nodes_in_group("checkpoints")
 	for checkpoint in checkpoints:
 		if checkpoint.global_position.distance_to(checkpoint_position) < 10:
-			checkpoint.activate()
+			if checkpoint.has_method("activate"):
+				checkpoint.activate(null)
 			break
 
 func respawn_player():
