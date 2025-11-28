@@ -165,17 +165,17 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d7efn"]
-radius = 9.0
-height = 24.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sknp7"]
+size = Vector2(15, 22)
 
 [node name="Samehader" instance=ExtResource("1_8vkrd")]
 script = ExtResource("2_xuojd")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_xuojd")
-animation = &"dead"
+animation = &"walk"
+frame_progress = 0.6746651
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(1, 2)
-shape = SubResource("CapsuleShape2D_d7efn")
+position = Vector2(0.5, 2)
+shape = SubResource("RectangleShape2D_sknp7")

@@ -88,7 +88,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dbbsr"]
-size = Vector2(4, 91)
+size = Vector2(33, 90)
 
 [node name="Checkpoint" type="Area2D"]
 script = ExtResource("1_dbbsr")
@@ -100,5 +100,5 @@ frame_progress = 0.115779854
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visibility_layer = 0
-position = Vector2(-15, 0.5)
+position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_dbbsr")
