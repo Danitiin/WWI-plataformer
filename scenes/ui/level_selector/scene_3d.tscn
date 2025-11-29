@@ -361,7 +361,7 @@ mesh = SubResource("BoxMesh_21vc4")
 shape = SubResource("BoxShape_West")
 
 [node name="PlayerSelector3D" parent="." instance=ExtResource("1_jaca1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15774548, 0.84000003, 0.04422298)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15774548, 0.7718091, 0.04422298)
 
 [node name="Water" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.33, 0)
@@ -377,21 +377,21 @@ surface_material_override/0 = SubResource("ShaderMaterial_2")
 [node name="Portales" type="Node3D" parent="."]
 
 [node name="Portal1" parent="Portales" instance=ExtResource("1_portal")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.33, 0.83, 0.67)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.33, 0.532, 0.67)
 level_id = 0
 
 [node name="Sign" parent="Portales/Portal1" instance=ExtResource("5_sign")]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 1.5, 0)
 
 [node name="Portal2" parent="Portales" instance=ExtResource("1_portal")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.33, 0.83, 0.67)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.33, 0.53220576, 0.67)
 level_id = 1
 
 [node name="Sign" parent="Portales/Portal2" instance=ExtResource("5_sign")]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 1.5, 0)
 
 [node name="Portal3" parent="Portales" instance=ExtResource("1_portal")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.06262565, 0.746285, -1.0649728)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.063, 0.532, -1.065)
 level_id = 2
 
 [node name="Sign" parent="Portales/Portal3" instance=ExtResource("5_sign")]

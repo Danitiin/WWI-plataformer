@@ -51,16 +51,17 @@ func change_direction():
 
 func _on_jump_timer_timeout():
 	if is_on_floor():
-		var jump_distance = jump_horizontal_speed * (2.0 * abs(jump_force) / gravity)
-		
+		# Calcular distancia del salto + margen para deslizamiento
+		var jump_distance = jump_horizontal_speed * (2.0 * abs(jump_force) / gravity) * 1.2
+
 		if $FloorCheckRaycast:
 			var original_pos = $FloorCheckRaycast.position
 			$FloorCheckRaycast.position = Vector2(direction * jump_distance, 0)
 			$FloorCheckRaycast.force_raycast_update()
-			
+
 			if not $FloorCheckRaycast.is_colliding():
 				change_direction()
-			
+				
 			$FloorCheckRaycast.position = original_pos
 			
 		sprite.play("anticipate_jump")

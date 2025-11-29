@@ -3,6 +3,7 @@ extends Node
 signal level_completed(level_id: int)
 
 var levels: Array[LevelData] = []
+var level_scenes: Array[PackedScene] = []  # Escenas pre-cargadas
 var all_abilities: Array[String] = ["Dash", "DoubleJump", "Glide"]
 var current_level: int = -1
 var current_level_ablities: Array[String] = []
@@ -53,6 +54,13 @@ func load_levels():
 		load("res://resources/levels/level_03_data.tres")
 	]
 
+	# Pre-cargar escenas para carga instantánea
+	level_scenes = [
+		load("res://scenes/levels/level_01/level_01.tscn"),
+		load("res://scenes/levels/level_02/level_02.tscn"),
+		load("res://scenes/levels/level_03/level_03.tscn")
+	]
+
 func load_level(level_id: int):
 	current_level = level_id
 
@@ -75,7 +83,7 @@ func load_level(level_id: int):
 
 	var level_data = levels[level_id]
 	current_level_ablities = level_data.abilities_in_level.duplicate()
-	get_tree().change_scene_to_file.call_deferred(level_data.scene_path)
+	get_tree().change_scene_to_packed.call_deferred(level_scenes[level_id])
 
 func complete_level():
 	if current_level == -1:
