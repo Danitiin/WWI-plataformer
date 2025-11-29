@@ -10,7 +10,13 @@ func physics_update(_delta: float) -> bool:
 	return false
 
 func activate():
-	if not player.is_on_floor() and not has_double_jumped:
+	if not player.is_on_floor() and not has_double_jumped and can_double_jump():
 		player.velocity.y = double_jump_velocity
 		has_double_jumped = true
 		# efecto visual o particulas abajo
+
+func can_double_jump() -> bool:
+	if player.is_spinning:
+		return false
+
+	return true
