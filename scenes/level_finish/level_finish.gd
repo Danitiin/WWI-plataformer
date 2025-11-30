@@ -7,13 +7,17 @@ func _ready():
 func _on_body_entered(body):
 	if not body.is_in_group("player"):
 		return
-
-	# Guardar coleccionables y completar nivel
+		
+	var complete_screen = preload("res://scenes/ui/loading_screens/level_complete.tscn").instantiate()
+	get_tree().root.add_child(complete_screen)
+	
+	await get_tree().create_timer(1.0).timeout
+	
 	GameManager.complete_level()
-
-	# Borrar checkpoint del nivel actual
+	
 	if GameManager.current_level >= 0:
 		GameManager.level_checkpoints.erase(GameManager.current_level)
-
-	# Volver al mapilla
+		
 	GameManager.return_to_level_selector()
+
+	complete_screen.queue_free()

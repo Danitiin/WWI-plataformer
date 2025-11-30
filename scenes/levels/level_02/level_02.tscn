@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://cpbacnqtb4bi1"]
+[gd_scene load_steps=48 format=4 uid="uid://cpbacnqtb4bi1"]
 
 [ext_resource type="Script" uid="uid://b24lthyqe7gih" path="res://scenes/levels/level_02/level_02.gd" id="1_e78mx"]
 [ext_resource type="Resource" uid="uid://w0fkbusaohtf" path="res://resources/levels/level_02_data.tres" id="2_0kshx"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://vu1raovqrwuf" path="res://scenes/enemies/samehader/samehader.tscn" id="20_e07yy"]
 [ext_resource type="PackedScene" uid="uid://d4jf31tep4lx5" path="res://scenes/hazards/kill_zone/kill_zone.tscn" id="20_m88yi"]
 [ext_resource type="PackedScene" uid="uid://ci72621xo5h3g" path="res://scenes/hazards/spikes/spike.tscn" id="21_617vc"]
+[ext_resource type="PackedScene" uid="uid://bniu3lhryu7x1" path="res://scenes/level_finish/flag_finish.tscn" id="25_gf26o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_at8xp"]
 texture = ExtResource("7_at8xp")
@@ -1198,6 +1199,7 @@ script = ExtResource("1_e78mx")
 level_data = ExtResource("2_0kshx")
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(25, 117)
 
 [node name="Tilesets" type="Node2D" parent="."]
 
@@ -1589,3 +1591,6 @@ position = Vector2(4992, 225)
 visible = false
 
 [node name="Hud" parent="Ui" instance=ExtResource("5_vs6ma")]
+
+[node name="FlagFinish" parent="." instance=ExtResource("25_gf26o")]
+position = Vector2(5369, 98)

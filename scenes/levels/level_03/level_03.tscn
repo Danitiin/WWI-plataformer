@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dkr745tr7kxm3"]
+[gd_scene load_steps=19 format=4 uid="uid://dkr745tr7kxm3"]
 
 [ext_resource type="Script" uid="uid://bt7tjqqvxtqol" path="res://scenes/levels/level_03/level_03.gd" id="2_hc64q"]
 [ext_resource type="PackedScene" uid="uid://bvk6mthybt2hs" path="res://scenes/collectibles/big_coin/big_coin.tscn" id="2_ulqsn"]
@@ -17,12 +17,14 @@
 [ext_resource type="PackedScene" uid="uid://886te6knwaxy" path="res://scenes/enemies/crabb/crabb.tscn" id="14_vfnik"]
 [ext_resource type="PackedScene" uid="uid://d4jf31tep4lx5" path="res://scenes/hazards/kill_zone/kill_zone.tscn" id="15_7sdh6"]
 [ext_resource type="PackedScene" uid="uid://bi8xk7l71nrk1" path="res://scenes/level_finish/level_finish.tscn" id="17_vfnik"]
+[ext_resource type="PackedScene" uid="uid://bniu3lhryu7x1" path="res://scenes/level_finish/flag_finish.tscn" id="18_vb6cb"]
 
 [node name="Level03" type="Node2D"]
 script = ExtResource("2_hc64q")
 level_data = ExtResource("2_x2joj")
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(48, 85)
 
 [node name="LevelFinish" parent="." instance=ExtResource("17_vfnik")]
 position = Vector2(6186, 85)
@@ -423,3 +425,6 @@ position = Vector2(5872, 206)
 visible = false
 
 [node name="Hud" parent="Ui" instance=ExtResource("5_4vxwg")]
+
+[node name="FlagFinish" parent="." instance=ExtResource("18_vb6cb")]
+position = Vector2(6171, 34)

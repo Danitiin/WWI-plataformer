@@ -13,7 +13,15 @@ func _ready():
 	add_child(player)
 
 	await get_tree().process_frame
-	player_spawn_position = player.global_position
+
+	##pillar la posicion de playerSpawn
+	var spawn_marker = $PlayerSpawn
+	if spawn_marker:
+		player.global_position = spawn_marker.global_position
+		player_spawn_position = spawn_marker.global_position
+	else:
+		player_spawn_position = player.global_position
+		push_warning("PlayerSpawn marker no encontrado, usando posición por defecto")
 
 	#quitar habilidades al entrar al nivel
 	if player.has_method("clear_temp_abilities"):

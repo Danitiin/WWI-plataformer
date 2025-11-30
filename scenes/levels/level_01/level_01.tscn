@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cq7ygttaymho8"]
+[gd_scene load_steps=21 format=4 uid="uid://cq7ygttaymho8"]
 
 [ext_resource type="Script" uid="uid://88smftbebkju" path="res://scenes/levels/level_01/level_01.gd" id="2_15mrc"]
 [ext_resource type="Resource" uid="uid://cptkn01au3wk1" path="res://resources/levels/level_01_data.tres" id="2_fi7ee"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c3kopfihrxxl3" path="res://scenes/collectibles/coin/coin.tscn" id="16_n50fv"]
 [ext_resource type="PackedScene" uid="uid://q2it0pm04as4" path="res://scenes/enemies/seashell/seashell.tscn" id="16_s4sw7"]
 [ext_resource type="PackedScene" uid="uid://bdrq670txpyx7" path="res://assets/enviroment/props/palm_trees/tile_set_palmera.tscn" id="17_s4sw7"]
+[ext_resource type="PackedScene" uid="uid://bniu3lhryu7x1" path="res://scenes/level_finish/flag_finish.tscn" id="18_cwr5l"]
 [ext_resource type="PackedScene" uid="uid://duhuoec6an78l" path="res://scenes/player/abilities/Dash/item_dash.tscn" id="18_wo1oe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n50fv"]
@@ -217,6 +218,7 @@ script = ExtResource("2_15mrc")
 level_data = ExtResource("2_fi7ee")
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(40, 93)
 
 [node name="LevelFinish" parent="." instance=ExtResource("14_x8ff0")]
 position = Vector2(5420, -76)
@@ -550,3 +552,6 @@ position = Vector2(4468, 265)
 visible = false
 
 [node name="Hud" parent="Ui" instance=ExtResource("10_7f7yp")]
+
+[node name="FlagFinish" parent="." instance=ExtResource("18_cwr5l")]
+position = Vector2(5405, -78)
