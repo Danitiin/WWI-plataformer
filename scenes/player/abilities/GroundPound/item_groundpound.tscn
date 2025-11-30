@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxioj8sralawx"]
+[gd_scene load_steps=14 format=3 uid="uid://dxioj8sralawx"]
 
 [ext_resource type="Texture2D" uid="uid://beyq8wivvf3c7" path="res://assets/items/collectibles/Green Bottle/01.png" id="1_s1tff"]
 [ext_resource type="Texture2D" uid="uid://c0dacsrlmsukx" path="res://assets/items/collectibles/Green Bottle/02.png" id="2_2fdq8"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://btmmq53q6hrue" path="res://assets/items/collectibles/Green Bottle/05.png" id="5_wbkmt"]
 [ext_resource type="Texture2D" uid="uid://dlaenm46dn4wb" path="res://assets/items/collectibles/Green Bottle/06.png" id="6_utl3g"]
 [ext_resource type="Texture2D" uid="uid://cttay5f2irar3" path="res://assets/items/collectibles/Green Bottle/07.png" id="7_50jjm"]
+[ext_resource type="Texture2D" uid="uid://dcwg4yj4xvgck" path="res://assets/items/collectibles/Potion Effect/01.png" id="8_wbkmt"]
+[ext_resource type="Texture2D" uid="uid://dkifgdxuuywyl" path="res://assets/items/collectibles/Potion Effect/02.png" id="9_utl3g"]
+[ext_resource type="Texture2D" uid="uid://en3fs2lnsmup" path="res://assets/items/collectibles/Potion Effect/03.png" id="10_50jjm"]
+[ext_resource type="Texture2D" uid="uid://bd2kliofenef5" path="res://assets/items/collectibles/Potion Effect/04.png" id="11_5y7c4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5y7c4"]
 animations = [{
@@ -35,6 +39,23 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_wbkmt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_utl3g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_50jjm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_5y7c4")
+}],
+"loop": false,
+"name": &"obtain",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6dmp8"]
@@ -43,7 +64,7 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5y7c4")
-animation = &"idle"
+animation = &"obtain"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6dmp8")

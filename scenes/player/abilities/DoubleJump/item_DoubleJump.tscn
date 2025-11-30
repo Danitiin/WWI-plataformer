@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c14ewh5k2uubu"]
+[gd_scene load_steps=15 format=3 uid="uid://c14ewh5k2uubu"]
 
 [ext_resource type="Texture2D" uid="uid://dvlhajm4114lg" path="res://assets/items/collectibles/Red Potion/01.png" id="1_84jrr"]
 [ext_resource type="Script" uid="uid://c8tetehwk44in" path="res://scenes/player/abilities/DoubleJump/item_double_jump.gd" id="1_ruac3"]
@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://b2onu83g6p6gr" path="res://assets/items/collectibles/Red Potion/05.png" id="5_uv7e7"]
 [ext_resource type="Texture2D" uid="uid://c2ie3aigpq7nr" path="res://assets/items/collectibles/Red Potion/06.png" id="6_06a6f"]
 [ext_resource type="Texture2D" uid="uid://dovn6wr1s1ouc" path="res://assets/items/collectibles/Red Potion/07.png" id="7_nka6k"]
+[ext_resource type="Texture2D" uid="uid://dcwg4yj4xvgck" path="res://assets/items/collectibles/Potion Effect/01.png" id="9_jj8xq"]
+[ext_resource type="Texture2D" uid="uid://dkifgdxuuywyl" path="res://assets/items/collectibles/Potion Effect/02.png" id="10_db1rq"]
+[ext_resource type="Texture2D" uid="uid://en3fs2lnsmup" path="res://assets/items/collectibles/Potion Effect/03.png" id="11_l0j7s"]
+[ext_resource type="Texture2D" uid="uid://bd2kliofenef5" path="res://assets/items/collectibles/Potion Effect/04.png" id="12_4cbeh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oatr1"]
 
@@ -38,6 +42,23 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_jj8xq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_db1rq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_l0j7s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4cbeh")
+}],
+"loop": false,
+"name": &"obtain",
+"speed": 10.0
 }]
 
 [node name="ItemDoubleJump" type="Area2D"]
@@ -48,4 +69,4 @@ shape = SubResource("RectangleShape2D_oatr1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_v31si")
-animation = &"idle"
+animation = &"obtain"

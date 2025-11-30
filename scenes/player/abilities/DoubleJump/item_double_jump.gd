@@ -11,4 +11,6 @@ func _on_body_entered(body):
 			body.unlock_temp_ability("DoubleJump")
 
 		# Efecto visual/sonido
+		$AnimatedSprite2D.play("obtain")
+		await $AnimatedSprite2D.animation_finished
 		queue_free()

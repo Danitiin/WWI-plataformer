@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvk6mthybt2hs"]
+[gd_scene load_steps=11 format=3 uid="uid://bvk6mthybt2hs"]
 
 [ext_resource type="PackedScene" uid="uid://bsxwalpytyj5e" path="res://scenes/collectibles/collectible_base/collectible_base.tscn" id="1_txsjx"]
 [ext_resource type="Texture2D" uid="uid://dp1y70iu344rb" path="res://assets/items/gems/Blue Diamond/01.png" id="2_speti"]
 [ext_resource type="Texture2D" uid="uid://crlesemlaypak" path="res://assets/items/gems/Blue Diamond/02.png" id="3_km7tn"]
 [ext_resource type="Texture2D" uid="uid://dueijkwdyga8k" path="res://assets/items/gems/Blue Diamond/03.png" id="4_tcwl5"]
 [ext_resource type="Texture2D" uid="uid://cdi3k0gh1m47m" path="res://assets/items/gems/Blue Diamond/04.png" id="5_xtwef"]
+[ext_resource type="Texture2D" uid="uid://dy476edjucfel" path="res://assets/items/gems/Diamond Effect/01.png" id="6_6ihqm"]
+[ext_resource type="Texture2D" uid="uid://ceo8bg1u7knk" path="res://assets/items/gems/Diamond Effect/02.png" id="7_rdx4b"]
+[ext_resource type="Texture2D" uid="uid://ld26h3ww837t" path="res://assets/items/gems/Diamond Effect/03.png" id="8_d43uw"]
+[ext_resource type="Texture2D" uid="uid://ylat1lxweoad" path="res://assets/items/gems/Diamond Effect/04.png" id="9_rb7hw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_km7tn"]
 animations = [{
@@ -24,15 +28,32 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_6ihqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rdx4b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_d43uw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_rb7hw")
+}],
+"loop": false,
+"name": &"obtain",
+"speed": 10.0
 }]
 
 [node name="CollectibleBase" instance=ExtResource("1_txsjx")]
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_km7tn")
-animation = &"idle"
-frame = 1
-frame_progress = 0.93239224
+animation = &"obtain"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -1)

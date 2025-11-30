@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3kopfihrxxl3"]
+[gd_scene load_steps=11 format=3 uid="uid://c3kopfihrxxl3"]
 
 [ext_resource type="Texture2D" uid="uid://tdmch2t0hmn8" path="res://assets/items/coins/Gold Coin/01.png" id="1_f7vta"]
 [ext_resource type="Script" uid="uid://c2rn6qhja4orh" path="res://scenes/collectibles/coin/coin.gd" id="1_fn44b"]
 [ext_resource type="Texture2D" uid="uid://eo15jnoppvq4" path="res://assets/items/coins/Gold Coin/02.png" id="2_fn44b"]
 [ext_resource type="Texture2D" uid="uid://dgfvm0nregmpx" path="res://assets/items/coins/Gold Coin/03.png" id="3_oscds"]
 [ext_resource type="Texture2D" uid="uid://dl5pwnqcq5dpj" path="res://assets/items/coins/Gold Coin/04.png" id="4_yyj76"]
+[ext_resource type="Texture2D" uid="uid://bqdun6101njpx" path="res://assets/items/coins/Coin Effect/01.png" id="6_ibywa"]
+[ext_resource type="Texture2D" uid="uid://dcmv2m3l2c02n" path="res://assets/items/coins/Coin Effect/02.png" id="7_60v3x"]
+[ext_resource type="Texture2D" uid="uid://bqr7ridrklxdc" path="res://assets/items/coins/Coin Effect/03.png" id="8_wapsd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ibywa"]
 animations = [{
@@ -24,6 +27,20 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ibywa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_60v3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wapsd")
+}],
+"loop": false,
+"name": &"obtain",
+"speed": 10.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_60v3x"]
@@ -36,7 +53,9 @@ is_persistent = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ibywa")
-animation = &"idle"
+animation = &"obtain"
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)

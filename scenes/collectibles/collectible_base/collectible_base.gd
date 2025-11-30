@@ -24,4 +24,7 @@ func _on_body_entered(body):
 func collect():
     collected.emit(self)
     # Espacio para implmentar particulas o sonidos que haga el coleccionable
+    if sprite and sprite.sprite_frames and sprite.sprite_frames.has_animation("obtain"):
+        sprite.play("obtain")
+        await sprite.animation_finished
     queue_free()
