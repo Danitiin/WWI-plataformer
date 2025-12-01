@@ -23,9 +23,6 @@ func _ready():
 	add_to_group("enemies")
 
 func _physics_process(delta):
-	#Temporal: Y para probar el daño
-	if Input.is_action_just_pressed("test_damage_enemy"):
-		take_damage(1)
 		
 	if animated_sprite:
 		animated_sprite.flip_h = move_direction > 0

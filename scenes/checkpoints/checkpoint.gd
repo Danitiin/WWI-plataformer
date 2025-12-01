@@ -18,9 +18,11 @@ func activate(player = null):
     is_activated = true
     print("Checkpoint puesto en: ", global_position)
 
-    var level = get_parent()
-    if level.has_method("activate_checkpoint"):
+    var level = get_tree().current_scene
+    if level and level.has_method("activate_checkpoint"):
         level.activate_checkpoint(global_position, player)
+    else:
+      push_error("ERROR: La escena actual no tiene el método activate_checkpoint")
 
     change_visual()
 

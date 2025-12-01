@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcs5g5nci1234"]
-
-[ext_resource type="Script" uid="uid://coibjl5umiyob" path="res://scenes/player/abilities/DoubleJump.gd" id="1_dj"]
-
-[node name="DoubleJump" type="Area2D"]
-script = ExtResource("1_dj")

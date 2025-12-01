@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqi87ay182n6a"]
+
+[ext_resource type="Script" uid="uid://deai2iwd2qyui" path="res://scenes/player/abilities/Dash/Dash.gd" id="1_yq2v5"]
+
+[node name="Dash" type="Area2D"]
+script = ExtResource("1_yq2v5")

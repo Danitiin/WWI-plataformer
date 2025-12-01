@@ -2,7 +2,7 @@ extends Node2D
 class_name LevelBase
 
 @export var level_data: LevelData
-var player_scene = preload("res://scenes/player/player.tscn")
+var player_scene = preload("res://scenes/player/player_level/player.tscn")
 var player: CharacterBody2D
 var player_spawn_position: Vector2 #Pos inicial del player
 var active_checkpoint_position: Vector2
@@ -53,6 +53,8 @@ func restore_checkpoint_if_exits():
 		return
 	#ver si ta guardao el checkpoint
 	if GameManager.level_checkpoints.has(level_data.level_id):
+		print("DEBUG: Buscando checkpoint para level_id: ", level_data.level_id)
+		print("DEBUG: Checkpoints guardados en GameManager: ", GameManager.level_checkpoints)
 		var checkpoint_pos = GameManager.level_checkpoints[level_data.level_id]
 		active_checkpoint_position = checkpoint_pos
 		has_active_checkpoint = true
@@ -73,10 +75,15 @@ func hide_collected_items():
 				collectible.queue_free()
 
 func activate_checkpoint(checkpoint_position: Vector2, player_node = null):
+	print("DEBUG activate_checkpoint llamado")
+	print("DEBUG level_data: ", level_data)
+	print("DEBUG level_data es null: ", level_data == null)
+
 	active_checkpoint_position = checkpoint_position
 	has_active_checkpoint = true
 
 	if level_data:
+		print("DEBUG: Guardando checkpoint en GameManager con level_id: ", level_data.level_id)
 		GameManager.level_checkpoints[level_data.level_id] = checkpoint_position
 		GameManager.save_checkpoint_collectibles(level_data.level_id)
 

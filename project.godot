@@ -92,7 +92,7 @@ test_damage_enemy={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://assets/dialogues/tuto_tin_start.dialogue")
+locale/translations_pot_files=PackedStringArray("res://assets/ui/dialogs/tuto_tin_start.dialogue")
 
 [layer_names]
 

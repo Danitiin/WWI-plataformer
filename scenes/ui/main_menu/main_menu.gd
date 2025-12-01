@@ -11,7 +11,7 @@ func _ready():
 	play_button.grab_focus()
 
 func _on_play_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/ui/level_selector/scene_3d.tscn")
+	get_tree().change_scene_to_file("res://scenes/level_selector/level_selector_3d.tscn")
 
 func _on_options_button_pressed():
 	var options_scene = load("res://scenes/ui/pause_menu/options_menu/options_menu.tscn")
@@ -26,9 +26,6 @@ func _on_options_closed():
 	# Mostrar el main menu cuando se cierra opciones
 	show()
 	play_button.grab_focus()
-
-func _on_test_level_button_pressed():
-	GameManager.load_level(-1)
 
 func _on_quit_button_pressed():
 	get_tree().quit()

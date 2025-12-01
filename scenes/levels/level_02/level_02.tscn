@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://ba373tpsswhss" path="res://assets/enviroment/props/Decorations/Chains/Big/01.png" id="14_38737"]
 [ext_resource type="Texture2D" uid="uid://bs82vkrmqikla" path="res://assets/enviroment/props/Decorations/Chains/Small/01.png" id="15_14c3l"]
 [ext_resource type="Texture2D" uid="uid://d2nba70u1dgnx" path="res://assets/enviroment/props/Decorations/Window/Window Light/01.png" id="16_gf26o"]
-[ext_resource type="PackedScene" uid="uid://c14ewh5k2uubu" path="res://scenes/player/abilities/DoubleJump/item_doubleJump.tscn" id="18_dmvle"]
+[ext_resource type="PackedScene" uid="uid://c14ewh5k2uubu" path="res://scenes/player/abilities/DoubleJump/item/item_double_jump.tscn" id="18_dmvle"]
 [ext_resource type="PackedScene" uid="uid://c3kopfihrxxl3" path="res://scenes/collectibles/coin/coin.tscn" id="19_wphuu"]
 [ext_resource type="PackedScene" uid="uid://vu1raovqrwuf" path="res://scenes/enemies/samehader/samehader.tscn" id="20_e07yy"]
 [ext_resource type="PackedScene" uid="uid://d4jf31tep4lx5" path="res://scenes/hazards/kill_zone/kill_zone.tscn" id="20_m88yi"]

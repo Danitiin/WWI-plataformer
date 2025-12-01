@@ -8,6 +8,7 @@ extends EnemyBase
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var jump_timer: Timer = $JumpTimer
 @onready var raycast: RayCast2D = $RayCast2D
+@onready var floor_check_raycast: RayCast2D = $FloorCheckRaycast
 
 var direction: int = 1
 
@@ -54,15 +55,15 @@ func _on_jump_timer_timeout():
 		# Calcular distancia del salto + margen para deslizamiento
 		var jump_distance = jump_horizontal_speed * (2.0 * abs(jump_force) / gravity) * 1.2
 
-		if $FloorCheckRaycast:
-			var original_pos = $FloorCheckRaycast.position
-			$FloorCheckRaycast.position = Vector2(direction * jump_distance, 0)
-			$FloorCheckRaycast.force_raycast_update()
+		if floor_check_raycast:
+			var original_pos = floor_check_raycast.position
+			floor_check_raycast.position = Vector2(direction * jump_distance, 0)
+			floor_check_raycast.force_raycast_update()
 
-			if not $FloorCheckRaycast.is_colliding():
+			if not floor_check_raycast.is_colliding():
 				change_direction()
 				
-			$FloorCheckRaycast.position = original_pos
+			floor_check_raycast.position = original_pos
 			
 		sprite.play("anticipate_jump")
 		await get_tree().create_timer(0.2).timeout

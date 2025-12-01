@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://rtahrnc1of6a"]
-
-[ext_resource type="Script" uid="uid://cjnlues2vyxdq" path="res://scenes/player/abilities/GroundPound.gd" id="1_1h88o"]
-
-[node name="GroundPound" type="Node2D"]
-script = ExtResource("1_1h88o")

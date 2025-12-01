@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bn8ng7uqo05km"
+path="res://.godot/imported/tuto_tin_start.dialogue-f5e89f2b91c3d401fb31bbe8fc9b9979.tres"
+
+[deps]
+
+source_file="res://assets/ui/dialogs/tuto_tin_start.dialogue"
+dest_files=["res://.godot/imported/tuto_tin_start.dialogue-f5e89f2b91c3d401fb31bbe8fc9b9979.tres"]
+
+[params]
+
+defaults=true

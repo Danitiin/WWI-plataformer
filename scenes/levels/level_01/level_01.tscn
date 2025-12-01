@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://q2it0pm04as4" path="res://scenes/enemies/seashell/seashell.tscn" id="16_s4sw7"]
 [ext_resource type="PackedScene" uid="uid://bdrq670txpyx7" path="res://assets/enviroment/props/palm_trees/tile_set_palmera.tscn" id="17_s4sw7"]
 [ext_resource type="PackedScene" uid="uid://bniu3lhryu7x1" path="res://scenes/level_finish/flag_finish.tscn" id="18_cwr5l"]
-[ext_resource type="PackedScene" uid="uid://duhuoec6an78l" path="res://scenes/player/abilities/Dash/item_dash.tscn" id="18_wo1oe"]
+[ext_resource type="PackedScene" uid="uid://duhuoec6an78l" path="res://scenes/player/abilities/Dash/item/item_dash.tscn" id="18_wo1oe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n50fv"]
 texture = ExtResource("5_s4sw7")
