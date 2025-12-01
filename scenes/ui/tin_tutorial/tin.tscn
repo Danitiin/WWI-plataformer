@@ -43,6 +43,7 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_px81w")
 animation = &"talk"
 frame = 3
