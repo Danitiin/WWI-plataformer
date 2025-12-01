@@ -3,6 +3,7 @@ const DEBUG_MODE = true
 
 var completed_levels: Array[int] = []
 var collected_items: Dictionary = {}
+var intro_dialogue_seen: bool = false
 
 const SAVE_PATH = "user://savegame.save"
 
@@ -13,7 +14,8 @@ func save_game():
 
 	var save_dict = {
 		"completed_levels": completed_levels,
-		"collected_items": collected_items
+		"collected_items": collected_items,
+		"intro_dialogue_seen": intro_dialogue_seen
 	}
 	var save_file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	save_file.store_var(save_dict)
@@ -32,6 +34,7 @@ func load_game():
 	
 	completed_levels = save_dict.get("completed_levels", [])
 	collected_items = save_dict.get("collected_items", {})
+	intro_dialogue_seen = save_dict.get("intro_dialogue_seen", false)
 	
 func add_collectible(level_id: int, collectible_id: int):
 	if level_id not in collected_items:

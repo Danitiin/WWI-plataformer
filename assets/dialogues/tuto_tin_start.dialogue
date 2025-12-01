@@ -1,19 +1,49 @@
 ~ start
-???: ¡Hola, chavalín! ¿Acabas de llegar a esta isla y no sabes ni dónde estás?
+???: ¡Eh! ¡Quieto parao!... ¿Quién eres?
+- Soy yo
+	???: Ah, bueno, si eres tú, pasa, pasa, que ahora te abro...
+	???: ...
+	???: ¡Espera! ¿Pero qué estoy diciendo? ¡Si aquí no hay puertas, esto es una isla!
+	???: ¿Te crees más listo que yo, eh?
+	- Sí
+		???: ¿Tú? ¿Listo? Pero si tienes pinta de haber perdido una pelea contra una puerta giratoria.
+		???: Tranquilo, como dije antes, aquí no hay puertas.
+		???: Aunque eso no te salva, se nota que estás perdido...
+	- No
+		???: Ahh... ¡pensaba, eh!
+		???: Nadie es más listo que yo, 1 + 1 = 11, ¡espabila!
+		???: ...
+		???: Veo que estás perdido...
+- No sé, estoy perdido
 ???: ¡Pues yo soy tu guía! Me llamo Tin, Tinogeremías Aristizábal de Montemayor... o menor, si eres muy alto.
-Tin: Te explico cómo va el asunto, estarás viendo 3 niveles. Simplemente acércate a cualquiera para entrar.
-Tin: Para moverte por estos lares usa tu instinto (y las flechitas del teclado o WASD).
-Tin: Y dentro de los niveles no va a ser todo tan fácil. Vas a tener que saltar usando tus piernas (y la tecla ESPACIO).
+Tin: Te explico cómo funcionan las cosas por aquí, estarás viendo 3 niveles. Simplemente acércate a cualquiera para entrar.
+Tin: Para moverte por estos lares usa tu instinto (y las flechitas del teclado).
+Tin: Dentro de los niveles no va a ser todo tan fácil, vas a tener que saltar usando tus piernas (y la tecla ESPACIO).
 Tin: Si intentas saltar otra vez cuando estés en el aire harás un spin. Te dará un mini impulso hacia arriba y te mantendrá flotando un poco.
-Tin: Tengo entendido que en cada nivel de esta isla hay pociones que te dan habilidades únicas.
+Tin: Creo que en cada nivel había algo, pero... se me ha olvidado.
+Tin: ...
+- ¿Entonces?
+	Tin: ¡Madera pa peonces! jajaja...
+	Tin: Que es broma hombre, que no se me ha olvidado.
+- ¿Y tú eres un guía?
+	Tin: Ehhh... claro, dame un momento, déjame acordarme...
+	Tin: (A ver a ver, por aquí estaba el libro...)
+	Tin: ...
+	Tin: (¡Aquí está!)
+	Tin: Ya me acordé, sí, te cuento...
+Tin: Son pociones, si te las bebes te otorgan habilidades.
 Tin: Si las ves, ve a por ellas. Se dice que necesitas una gran fuerza mental (y el Shift izquierdo) para usarlas.
-Tin: Por aquí hay enemigos. Si los ves, sáltales encima para que no te molesten más.
+Tin: Tienes que andarte con ojo, aquí hay enemigos. Si los ves, sáltales encima para que no te molesten más.
 Tin: ...
 Tin: ¿No crees que sea suficiente? Igual si te piso yo la cabeza cambias de opinión...
-Tin: Ah, sí. Si te pones muy nervioso y no puedes con el nivel (o porque eres muy malo), grita muy fuerte (o pulsa ESC).
-Tin: Verás la forma de calmar tus nervios, en esta isla eso también funciona.
+Tin: Ah, sí. Si necesitas rascarte la nariz, piensa en escapar (pulsa ESC).
+Tin: Congela el tiempo mágicamente, en esta isla también funciona.
 Tin: Y eso es todo lo que necesitas saber, ya te puedes ir.
 Tin: ...
-Tin: ¿Que no quieres?
-Tin: No me vengas con excusas. ¡ni pero ni pera! ¡Tira pa' allá, hombre!
+- Pero... no quiero
+	Tin: ¿Qué no quieres?
+	Tin: No me vengas con excusas. ¡Ni pero ni pera! ¡Tira pa' allá, hombre!
+- ¡Gracias!
+	Tin: De nada. Ya sé que soy el mejor, un día más.
+	Tin: Ale, adiós.
 => END
