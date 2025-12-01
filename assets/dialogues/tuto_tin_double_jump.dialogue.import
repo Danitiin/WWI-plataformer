@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://b3lpvilx4ax05"
+path="res://.godot/imported/tuto_tin_double_jump.dialogue-cbb6a1dfd67e07c738b1081a84500c37.tres"
+
+[deps]
+
+source_file="res://assets/dialogues/tuto_tin_double_jump.dialogue"
+dest_files=["res://.godot/imported/tuto_tin_double_jump.dialogue-cbb6a1dfd67e07c738b1081a84500c37.tres"]
+
+[params]
+
+defaults=true

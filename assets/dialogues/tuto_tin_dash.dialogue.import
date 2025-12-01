@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://4as5yttrlj8r"
+path="res://.godot/imported/tuto_tin_dash.dialogue-b09b9c3f499dc710e03091d817822593.tres"
+
+[deps]
+
+source_file="res://assets/dialogues/tuto_tin_dash.dialogue"
+dest_files=["res://.godot/imported/tuto_tin_dash.dialogue-b09b9c3f499dc710e03091d817822593.tres"]
+
+[params]
+
+defaults=true

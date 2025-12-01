@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bfegpjj1ajv60"
+path="res://.godot/imported/tuto_tin_glide.dialogue-1c3b85162a6d6bcd64fcda77528a6ef6.tres"
+
+[deps]
+
+source_file="res://assets/dialogues/tuto_tin_glide.dialogue"
+dest_files=["res://.godot/imported/tuto_tin_glide.dialogue-1c3b85162a6d6bcd64fcda77528a6ef6.tres"]
+
+[params]
+
+defaults=true
