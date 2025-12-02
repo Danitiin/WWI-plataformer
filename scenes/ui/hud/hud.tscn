@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://d135p3nmej7ya"]
+[gd_scene load_steps=9 format=3 uid="uid://d135p3nmej7ya"]
 
 [ext_resource type="Script" uid="uid://di4d2ey3n0kgr" path="res://scenes/ui/hud/hud.gd" id="1_bngdn"]
 [ext_resource type="Texture2D" uid="uid://deebsankyubq1" path="res://assets/items/gems/Blue Diamond/collectible_empty.png" id="2_as3gr"]
 [ext_resource type="Texture2D" uid="uid://kqhv311lcl2a" path="res://assets/items/gems/Blue Diamond/collectible_filled.png" id="3_ax4tw"]
 [ext_resource type="Texture2D" uid="uid://tdmch2t0hmn8" path="res://assets/items/coins/Gold Coin/01.png" id="4_ax4tw"]
+[ext_resource type="Texture2D" uid="uid://73luk4p0ymtk" path="res://assets/ui/hud/healt_bar/Life Bars/Big Bars/1.png" id="5_e7gie"]
+[ext_resource type="Texture2D" uid="uid://gssrg78hsu1j" path="res://assets/ui/hud/healt_bar/Life Bars/Big Bars/3.png" id="6_swth0"]
+[ext_resource type="Texture2D" uid="uid://bbknsqmfsmh6x" path="res://assets/ui/hud/healt_bar/Life Bars/Big Bars/4.png" id="7_a660p"]
+[ext_resource type="Texture2D" uid="uid://x4liohsdkvle" path="res://assets/ui/hud/healt_bar/Life Bars/Colors/1.png" id="8_m7evv"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_bngdn")
@@ -11,10 +15,15 @@ diamond_empty_texture = ExtResource("2_as3gr")
 diamond_filled_texture = ExtResource("3_ax4tw")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_right = 200.0
-offset_bottom = 50.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 110.0
+grow_horizontal = 0
 
 [node name="DiamondContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_direction = 3
 layout_mode = 2
 theme_override_constants/separation = -15
 
@@ -37,12 +46,13 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="CoinContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_direction = 3
 layout_mode = 2
 theme_override_constants/separation = 4
 
 [node name="CoinIcon" type="TextureRect" parent="VBoxContainer/CoinContainer"]
-custom_minimum_size = Vector2(32, 32)
 texture_filter = 1
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("4_ax4tw")
 expand_mode = 1
@@ -51,4 +61,39 @@ stretch_mode = 5
 [node name="CoinLabel" type="Label" parent="VBoxContainer/CoinContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "x 00"
+text = "00 x"
+
+[node name="HealthBar" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HealthBarContainer" type="HBoxContainer" parent="VBoxContainer/HealthBar"]
+layout_direction = 2
+layout_mode = 0
+offset_left = -942.0
+offset_top = -120.0
+offset_right = -846.0
+offset_bottom = -88.0
+scale = Vector2(2.3, 2.3)
+theme_override_constants/separation = 0
+
+[node name="BarLeft" type="TextureRect" parent="VBoxContainer/HealthBar/HealthBarContainer"]
+layout_mode = 2
+texture = ExtResource("5_e7gie")
+
+[node name="BarMid" type="TextureRect" parent="VBoxContainer/HealthBar/HealthBarContainer"]
+layout_mode = 2
+texture = ExtResource("6_swth0")
+
+[node name="BarRight" type="TextureRect" parent="VBoxContainer/HealthBar/HealthBarContainer"]
+layout_mode = 2
+texture = ExtResource("7_a660p")
+
+[node name="HealthFill" type="TextureProgressBar" parent="."]
+offset_left = 49.0
+offset_top = 26.0
+offset_right = 222.0
+offset_bottom = 31.0
+max_value = 3.0
+value = 3.0
+nine_patch_stretch = true
+texture_progress = ExtResource("8_m7evv")

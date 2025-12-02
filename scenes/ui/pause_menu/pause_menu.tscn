@@ -6,6 +6,7 @@
 bg_color = Color(0.16862746, 0.16862746, 0.16862746, 1)
 
 [node name="PauseMenu" type="CanvasLayer"]
+layer = 101
 script = ExtResource("1_kgchh")
 
 [node name="Panel" type="Panel" parent="."]
