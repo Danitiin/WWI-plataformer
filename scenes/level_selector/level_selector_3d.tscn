@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cg721vsib53hd"]
+[gd_scene load_steps=28 format=3 uid="uid://cg721vsib53hd"]
 
 [ext_resource type="Script" uid="uid://iob8is6lwuw6" path="res://scenes/level_selector/level_selector_3d.gd" id="1_vssfw"]
 [ext_resource type="PackedScene" uid="uid://bqnevuk8j6l8e" path="res://scenes/player/player_level_selector/player_selector_3d.tscn" id="2_e3rc1"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://s4joiixvs22j" path="res://scenes/ui/pause_menu/pause_menu.tscn" id="5_j0mf1"]
 [ext_resource type="AudioStream" uid="uid://d17cqtfxmfvxo" path="res://assets/audio/music/level_selector_3d/level_selector_music.mp3" id="6_cmjsy"]
 [ext_resource type="PackedScene" uid="uid://dyoxbqehwwb50" path="res://scenes/ui/tin_tutorial/tin.tscn" id="7_va4v3"]
+[ext_resource type="PackedScene" uid="uid://dfnimd1oi3uc6" path="res://scenes/level_selector/npcs/wingull.tscn" id="8_07u3t"]
 
 [sub_resource type="Environment" id="Environment_1"]
 background_mode = 1
@@ -411,3 +412,6 @@ offset_left = 170.0
 offset_top = 350.0
 offset_right = 170.0
 offset_bottom = 350.0
+
+[node name="Wingull" parent="." instance=ExtResource("8_07u3t")]
+transform = Transform3D(1, 0, 0, 0, 0.9063077, 0.42261824, 0, -0.42261824, 0.9063077, 2.0002503, 0.7087039, -1.3790885)

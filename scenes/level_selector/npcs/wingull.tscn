@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfnimd1oi3uc6"]
+
+[ext_resource type="Script" uid="uid://b7ln06b3jf7du" path="res://scenes/level_selector/npcs/wingull.gd" id="1_o73lb"]
+[ext_resource type="Texture2D" uid="uid://c217p0g07kyjh" path="res://assets/characters/npcs/wingull/idle-01.png" id="2_fb10i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o73lb"]
+size = Vector3(0.8163452, 0.42266846, 0.042419434)
+
+[node name="Wingull" type="Area3D"]
+script = ExtResource("1_o73lb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0206604, -0.026153564, -0.0027770996)
+shape = SubResource("BoxShape3D_o73lb")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("2_fb10i")
+
+[node name="InteractionLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.01)
+text = "Presiona ESPACIO"

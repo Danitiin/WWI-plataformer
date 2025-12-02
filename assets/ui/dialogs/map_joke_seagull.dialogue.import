@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://ddd0fedo036b6"
+path="res://.godot/imported/map_joke_seagull.dialogue-8f2da379917d3cb03653a34ace41fe07.tres"
+
+[deps]
+
+source_file="res://assets/ui/dialogs/map_joke_seagull.dialogue"
+dest_files=["res://.godot/imported/map_joke_seagull.dialogue-8f2da379917d3cb03653a34ace41fe07.tres"]
+
+[params]
+
+defaults=true
