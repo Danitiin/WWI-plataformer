@@ -405,6 +405,7 @@ visible = false
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_cmjsy")
 autoplay = true
+bus = &"Music"
 
 [node name="Tin" parent="." instance=ExtResource("7_va4v3")]
 visible = false

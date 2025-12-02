@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c14ewh5k2uubu"]
+[gd_scene load_steps=16 format=3 uid="uid://c14ewh5k2uubu"]
 
 [ext_resource type="Texture2D" uid="uid://dvlhajm4114lg" path="res://assets/items/collectibles/Red Potion/01.png" id="1_84jrr"]
 [ext_resource type="Script" uid="uid://c8tetehwk44in" path="res://scenes/player/abilities/DoubleJump/item/item_double_jump.gd" id="1_ruac3"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dkifgdxuuywyl" path="res://assets/items/collectibles/Potion Effect/02.png" id="10_db1rq"]
 [ext_resource type="Texture2D" uid="uid://en3fs2lnsmup" path="res://assets/items/collectibles/Potion Effect/03.png" id="11_l0j7s"]
 [ext_resource type="Texture2D" uid="uid://bd2kliofenef5" path="res://assets/items/collectibles/Potion Effect/04.png" id="12_4cbeh"]
+[ext_resource type="AudioStream" uid="uid://dwc36tmaqsd3s" path="res://assets/audio/sfx/potion/potion.wav" id="13_iw0ol"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oatr1"]
 
@@ -70,3 +71,7 @@ shape = SubResource("RectangleShape2D_oatr1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_v31si")
 animation = &"obtain"
+
+[node name="PotionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_iw0ol")
+bus = &"SFX"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3kopfihrxxl3"]
+[gd_scene load_steps=12 format=3 uid="uid://c3kopfihrxxl3"]
 
 [ext_resource type="Texture2D" uid="uid://tdmch2t0hmn8" path="res://assets/items/coins/Gold Coin/01.png" id="1_f7vta"]
 [ext_resource type="Script" uid="uid://c2rn6qhja4orh" path="res://scenes/collectibles/coin/coin.gd" id="1_fn44b"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bqdun6101njpx" path="res://assets/items/coins/Coin Effect/01.png" id="6_ibywa"]
 [ext_resource type="Texture2D" uid="uid://dcmv2m3l2c02n" path="res://assets/items/coins/Coin Effect/02.png" id="7_60v3x"]
 [ext_resource type="Texture2D" uid="uid://bqr7ridrklxdc" path="res://assets/items/coins/Coin Effect/03.png" id="8_wapsd"]
+[ext_resource type="AudioStream" uid="uid://byax82ioknr7a" path="res://assets/audio/sfx/coin/coin.wav" id="9_60v3x"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ibywa"]
 animations = [{
@@ -60,3 +61,7 @@ frame_progress = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_60v3x")
+
+[node name="CoinSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_60v3x")
+bus = &"SFX"

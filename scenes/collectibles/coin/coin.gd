@@ -6,3 +6,10 @@ func _ready():
 
 	if sprite:
 		sprite.play("idle")
+
+func collect():
+	print("collect llamado")
+	if has_node("CoinSound"):
+		$CoinSound.play()
+		await $CoinSound.finished
+	super.collect()

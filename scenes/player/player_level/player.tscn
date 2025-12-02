@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://crojd4pydu8k3"]
+[gd_scene load_steps=53 format=3 uid="uid://crojd4pydu8k3"]
 
 [ext_resource type="Script" uid="uid://bv7r2px0kqnki" path="res://scenes/player/player_level/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://q04lwrqoqmtx" path="res://assets/characters/player/Pink Star/01-Idle/Idle 01.png" id="2_dovo2"]
@@ -48,6 +48,7 @@
 [ext_resource type="Texture2D" uid="uid://immsfmpagxqw" path="res://assets/characters/player/Pink Star/03-Jump/Jump 02.png" id="29_hir57"]
 [ext_resource type="Texture2D" uid="uid://bx5nqje26v10e" path="res://assets/characters/player/Pink Star/03-Jump/Jump 03.png" id="30_7072n"]
 [ext_resource type="Texture2D" uid="uid://b0bv7vy0ggx3h" path="res://assets/characters/player/Pink Star/12-Spin/Spin 01.png" id="45_rw8a5"]
+[ext_resource type="AudioStream" uid="uid://bkx3jshqlp4gf" path="res://assets/audio/sfx/jump/jump.wav" id="49_ol1qi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ugbui"]
 animations = [{
@@ -291,3 +292,7 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_rw8a5")
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("49_ol1qi")
+bus = &"SFX"

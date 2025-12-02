@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dxioj8sralawx"]
+[gd_scene load_steps=15 format=3 uid="uid://dxioj8sralawx"]
 
 [ext_resource type="Texture2D" uid="uid://beyq8wivvf3c7" path="res://assets/items/collectibles/Green Bottle/01.png" id="1_s1tff"]
 [ext_resource type="Texture2D" uid="uid://c0dacsrlmsukx" path="res://assets/items/collectibles/Green Bottle/02.png" id="2_2fdq8"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dkifgdxuuywyl" path="res://assets/items/collectibles/Potion Effect/02.png" id="9_utl3g"]
 [ext_resource type="Texture2D" uid="uid://en3fs2lnsmup" path="res://assets/items/collectibles/Potion Effect/03.png" id="10_50jjm"]
 [ext_resource type="Texture2D" uid="uid://bd2kliofenef5" path="res://assets/items/collectibles/Potion Effect/04.png" id="11_5y7c4"]
+[ext_resource type="AudioStream" uid="uid://dwc36tmaqsd3s" path="res://assets/audio/sfx/potion/potion.wav" id="12_e044u"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5y7c4"]
 animations = [{
@@ -68,3 +69,7 @@ animation = &"obtain"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6dmp8")
+
+[node name="PotionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_e044u")
+bus = &"SFX"

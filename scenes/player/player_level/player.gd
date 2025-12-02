@@ -191,6 +191,9 @@ func perform_jump():
 	can_spin = true
 	jump_was_pressed = true
 
+	if has_node("JumpSound"):
+		$JumpSound.play()
+
 	is_anticipating = true
 	get_tree().create_timer(anticipation_duration).timeout.connect(func():is_anticipating = false)
 

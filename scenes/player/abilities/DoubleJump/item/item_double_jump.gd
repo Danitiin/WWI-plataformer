@@ -13,6 +13,8 @@ func _on_body_entered(body):
 			body.unlock_temp_ability("DoubleJump")
 
 		# Efecto visual/sonido
+		if has_node("PotionSound"):
+			$PotionSound.play()
 		sprite.play("obtain")
 		await sprite.animation_finished
 		queue_free()

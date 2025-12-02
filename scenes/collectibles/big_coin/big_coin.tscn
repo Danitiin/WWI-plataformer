@@ -57,3 +57,6 @@ frame_progress = 1.0
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -1)
+
+[node name="DiamondSound" type="AudioStreamPlayer2D" parent="." index="3"]
+bus = &"SFX"
