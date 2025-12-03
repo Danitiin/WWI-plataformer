@@ -14,6 +14,7 @@ func _on_body_entered(body):
 	var complete_screen = preload("res://scenes/ui/loading_screens/level_complete.tscn").instantiate()
 	get_tree().root.add_child(complete_screen)
 	
+	# Se espera un segundo para que se pueda leer que se completo el nivel
 	await get_tree().create_timer(1.0).timeout
 	
 	#Volver a poner el sonido
@@ -21,6 +22,7 @@ func _on_body_entered(body):
 	
 	GameManager.complete_level()
 	
+	#se borra el checkpoint si esta activado
 	if GameManager.current_level >= 0:
 		GameManager.level_checkpoints.erase(GameManager.current_level)
 		

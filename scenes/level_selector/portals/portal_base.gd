@@ -3,6 +3,7 @@ extends Area3D
 @export var level_id: int = -1
 
 func _ready():
+    #detectamos si algo entra en el area del portal
     body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body):
@@ -10,6 +11,7 @@ func _on_body_entered(body):
         print("ERROR: El portal no tiene un ID de nivel válido.")
         return
 
+    # Si lo que entra es el player
     if body.is_in_group("player"):
         print("Jugador detectado. Cargando nivel %s..." % level_id)
 
@@ -26,7 +28,7 @@ func _on_body_entered(body):
         #Volver a poner el sonido
         AudioServer.set_bus_mute(0, false)
 
-        #Cargar el nivel
+        #Cargamos el nivel y cambiamos la escena para mostrar el nivel
         GameManager.load_level(level_id)
 
         loading_screen.queue_free()

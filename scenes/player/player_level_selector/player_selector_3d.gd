@@ -4,7 +4,7 @@ extends CharacterBody3D
 @onready var animated_sprite_3d = $AnimatedSprite3D
 
 func _physics_process(_delta):
-    #Movimiento
+    #Movimiento en la isla del player
     var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
     var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
@@ -15,6 +15,7 @@ func _physics_process(_delta):
     update_animation(input_dir)
 
 func update_animation(input_dir: Vector2):
+    #Segun si el player se mueve o no, reproducir run o idle
     if input_dir.length() > 0.1:
         if animated_sprite_3d.animation != "run":
             animated_sprite_3d.play("run")

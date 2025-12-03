@@ -20,4 +20,4 @@ texture = ExtResource("2_fb10i")
 
 [node name="InteractionLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.01)
-text = "Presiona ESPACIO"
+text = "Pulsa ESPACIO"

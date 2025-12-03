@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+#Distingue si se abrio en un nivel o en level selector
 enum Context { LEVEL, LEVEL_SELECTOR }
 
 @onready var panel = $Panel
@@ -11,31 +12,37 @@ enum Context { LEVEL, LEVEL_SELECTOR }
 var current_context: Context = Context.LEVEL
 
 func _ready():
+	#Pasue menu sigue procesandose aunque se congele el juego
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	hide()
 
-	#en que entorno esta el player
+	#En que entorno esta el player
 	detect_context()
 
-	#enseñar unos botones u otros segun si el player esta en un nivel o en el mapa
+	#Enseñar unos botones u otros segun si el player esta en un nivel o en el mapa
 	configure_buttons()
 
+	#Conecta las señales para saber cuando se pulsan los botones
 	resume_button.pressed.connect(_on_resume_pressed)
 	restart_button.pressed.connect(_on_restart_pressed)
 	options_button.pressed.connect(_on_options_pressed)
 	main_menu_button.pressed.connect(_on_main_menu_pressed)
 
 func detect_context():
+	#Si no estas en un nivel
 	if GameManager.current_level == -1:
 		var scene_name = get_tree().current_scene.name
 		if scene_name == "LevelSelector":
+			#Esta en level selector
 			current_context = Context.LEVEL_SELECTOR
 		else:
+			#Esta en un nivel
 			current_context = Context.LEVEL
 	else:
 		current_context = Context.LEVEL
 
 func configure_buttons():
+	#Depende de donde este muestra unos botones u otros
 	match current_context:
 		Context.LEVEL:
 			restart_button.visible = true
@@ -45,6 +52,7 @@ func configure_buttons():
 			options_button.visible = true
 
 func _input(event):
+	#Si se presiona "ui_cancel"(ESC) pausa o despausa
 	if event.is_action_pressed("ui_cancel"):
 		if get_tree().paused:
 			resume_game()
@@ -71,18 +79,23 @@ func _on_restart_pressed():
 	if player and player.has_method("clear_temp_abilities"):
 		player.clear_temp_abilities()
 
+	#Borra el checkpoint guardado del nivel actual
 	if GameManager.current_level >= 0:
 		GameManager.level_checkpoints.erase(GameManager.current_level)
 		GameManager.checkpoint_collected_items.erase(GameManager.current_level)
 		GameManager.checkpoint_unlocked_abilities.erase(GameManager.current_level)
 		GameManager.temp_collected_items.clear()
 
+	#Recarga la escena
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 func _on_options_pressed():
+	#Carga e instancia el menu de opciones
 	var options_scene = load("res://scenes/ui/pause_menu/options_menu/options_menu.tscn")
 	var options_instance = options_scene.instantiate()
+	#Conecta la señal para poder cerrar las opciones
+	#Y evita que ESC cierre pause menu mientras esta en opciones
 	get_tree().root.add_child(options_instance)
 	options_instance.options_closed.connect(_on_options_closed)
 	set_process_input(false)

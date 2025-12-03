@@ -24,15 +24,20 @@ func _ready():
 
 	await get_tree().process_frame
 	var player = get_tree().get_first_node_in_group("player")
+	#Si hay player
 	if player:
+		#conecta la vida del player para saber cuando cambia
 		player.health_changed.connect(_on_player_health_changed)
 		_on_player_health_changed(player.current_health, player.max_health)
 
 func connect_to_collectibles():
+	#Conecta las señales de todos los coleccionables del nivel (diamantes)
 	var collectibles = get_tree().get_nodes_in_group("collectibles")
 
 	for collectible in collectibles:
+		#Si el coleccionable tiene señal de recogido
 		if collectible.has_signal("collected"):
+			# Si es una moneda
 			if collectible is Coin:
 				collectible.collected.connect(_on_coin_collected)
 			else:
@@ -40,15 +45,18 @@ func connect_to_collectibles():
 				
 	update_diamond_display()
 
-func _on_diamond_collected(_collectible):
-	update_diamond_display()
-	print("Diamante recogido! Total: ", GameManager.temp_collected_items.size())
-
+#Suma una moneda al contador y las actualiza
 func _on_coin_collected(_coin):
 	current_coins += 1
 	update_coin_display()
 
+#Actualiza los diamantes
+func _on_diamond_collected(_collectible):
+	update_diamond_display()
+	print("Diamante recogido! Total: ", GameManager.temp_collected_items.size())
+
 func update_diamond_display():
+	#Actualiza los sprites de los diamantes
 	
 	if diamond1:
 		diamond1.texture = diamond_filled_texture if 0 in GameManager.temp_collected_items else diamond_empty_texture
@@ -58,8 +66,10 @@ func update_diamond_display():
 		diamond3.texture = diamond_filled_texture if 2 in GameManager.temp_collected_items else diamond_empty_texture
 
 func update_coin_display():
+	#Actualiza el texto del contador de monedas
 	coin_label.text = "%02d x" % current_coins
 
+#Cuando la vida del player cambia, actualiza la barra
 func _on_player_health_changed(current_health: int, max_health: int):
 	if health_fill:
 		health_fill.max_value = max_health
