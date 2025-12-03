@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bqdun6101njpx" path="res://assets/items/coins/Coin Effect/01.png" id="6_ibywa"]
 [ext_resource type="Texture2D" uid="uid://dcmv2m3l2c02n" path="res://assets/items/coins/Coin Effect/02.png" id="7_60v3x"]
 [ext_resource type="Texture2D" uid="uid://bqr7ridrklxdc" path="res://assets/items/coins/Coin Effect/03.png" id="8_wapsd"]
-[ext_resource type="AudioStream" uid="uid://byax82ioknr7a" path="res://assets/audio/sfx/coin/coin.wav" id="9_60v3x"]
+[ext_resource type="AudioStream" uid="uid://byax82ioknr7a" path="res://assets/audio/sfx/collectibles/coin/coin.wav" id="9_60v3x"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ibywa"]
 animations = [{

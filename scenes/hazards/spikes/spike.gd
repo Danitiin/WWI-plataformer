@@ -8,8 +8,6 @@ func _ready():
 
 func _on_body_entered(body: Node2D):
     if body.is_in_group("player"):
-        var knockback_direction = Vector2(0, -1)
-
-        if body.has_method("take_damage"):
-            body.take_damage(damage, knockback_direction * knockback_force)
-            print("Spike hizo daño al player")
+        if body.has_method("die"):
+            body.die()
+            print("Spike mató al player")

@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dkifgdxuuywyl" path="res://assets/items/collectibles/Potion Effect/02.png" id="10_pgwqy"]
 [ext_resource type="Texture2D" uid="uid://en3fs2lnsmup" path="res://assets/items/collectibles/Potion Effect/03.png" id="11_nawx5"]
 [ext_resource type="Texture2D" uid="uid://bd2kliofenef5" path="res://assets/items/collectibles/Potion Effect/04.png" id="12_ey4ru"]
-[ext_resource type="AudioStream" uid="uid://dwc36tmaqsd3s" path="res://assets/audio/sfx/potion/potion.wav" id="13_afgsn"]
+[ext_resource type="AudioStream" uid="uid://dwc36tmaqsd3s" path="res://assets/audio/sfx/collectibles/potion/potion.wav" id="13_afgsn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nawx5"]
 animations = [{

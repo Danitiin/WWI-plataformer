@@ -91,39 +91,48 @@ var is_hit: bool = false
 @onready var camera: Camera2D = $Camera2D
 
 func _ready():
+	#Inicializa la vida y emite una señal para el hud
 	add_to_group("player")
 	current_health = max_health
 	health_changed.emit(current_health, max_health)
 	load_level_ability()
 
+	#Si hay hurt_box
 	if hurt_box:
+		#Conecta la señal para saber con que choca
 		hurt_box.body_entered.connect(_on_hurt_box_body_entered)
 
 func load_level_ability():
+	#Coge las habilidades
 	var level_ability_names = GameManager.get_level_abilities()
-
-	#empezar con las habilidades bloqueadas
+	#limpia las habilidades desbloqueadas
 	unlocked_abilities.clear()
+	
+	#Carga las habilidades del nivel (bloqueadas hasta recoger su poción)
 	for ability_name in level_ability_names:
 		unlocked_abilities[ability_name] = false
 		add_ability(ability_name)
 
 func add_ability(ability_name: String):
+	#Busca la habilidad
 	var ability_path = "res://scenes/player/abilities/" + ability_name + "/" + ability_name + ".tscn"
 	if not ResourceLoader.exists(ability_path):
 		push_error("No hay habilidad: %s" % ability_name)
 		return
 
+	#Carga el archivo como un PackedScene (escena en memoria para instanciarla luego)
 	var ability_scene = load(ability_path) as PackedScene
 	if not ability_scene:
 		push_error("No se pudo cargar la escena de habilidad: %s" % ability_path)
 		return
 
+	#Instancia la escena como AbilityBase
 	var ability = ability_scene.instantiate() as AbilityBase
 	if not ability:
 		push_error("No se pudo instanciar la habilidad: %s" % ability_path)
 		return
 	
+	#Añade la habilidad al player como hija
 	add_child(ability)
 	ability.putAbility(self)
 	abilities.append(ability)
@@ -142,12 +151,9 @@ func _physics_process(delta: float):
 	update_spin_visual(delta)
 	move_and_slide()
 
-	#Temporal: T para probar el daño
-	if Input.is_action_just_pressed("test_damage"):
-		take_damage(1,Vector2(-100, -200))
-
 # Aplicar gravedad
 func handle_gravity(delta: float):
+	#Si hay una habilidad usandose no aplica gravedad
 	if ability_in_control:
 		return
 
@@ -155,9 +161,11 @@ func handle_gravity(delta: float):
 		velocity.y = 0.0
 		return
 
+	#Reduce la gravedad si el player esta haciendo un spin
 	var gravity_multiplier = spin_gravity_multiplier if is_spinning else 1.0
 	velocity.y += gravity * gravity_multiplier * delta
-
+	
+	#Limita la velocidad de caida
 	velocity.y = min(velocity.y, gravity * max_gravity_multiplier)
 
 # Actualizar temporizadores
@@ -165,12 +173,13 @@ func update_timers(delta: float):
 	coyote_time_timer = max(0.0, coyote_time_timer - delta)
 	jump_buffer_timer = max(0.0, jump_buffer_timer - delta)
 	
+	#Duración del spin
 	if spin_timer > 0.0:
 		spin_timer -= delta
 		if spin_timer <= 0.0:
 			end_spin()
 	
-	# Coyote Time y estado cuando el payer esta en el suelo
+	# Coyote Time y estado cuando el player esta en el suelo
 	if is_on_floor():
 		coyote_time_timer = coyote_time_duration
 		can_spin = false
@@ -180,11 +189,16 @@ func update_timers(delta: float):
 func handle_jump():
 	# Comprobar si hay que saltar
 	var can_jump = is_on_floor() or coyote_time_timer > 0.0
-	
+	"""
+	Si el jugador presiono saltar antes de tocar el suelo, (para que el jugador no se fruste
+	porque pulso saltar muy poco tiempo antes de tocar el suelo y el player no salto) puede
+	saltar, no esta haciendo animacion de anticipar y si no salto ya con esa pulsación
+	"""
 	if jump_buffer_timer > 0.0 and can_jump and not is_anticipating and not jump_was_pressed:
 		perform_jump()
 
 func perform_jump():
+	#Velocidad de salto, resetea timers y habilita spin
 	velocity.y = jump_velocity
 	coyote_time_timer = 0.0
 	jump_buffer_timer = 0.0
@@ -194,9 +208,11 @@ func perform_jump():
 	if has_node("JumpSound"):
 		$JumpSound.play()
 
+	#Activa la animacion de anticipation
 	is_anticipating = true
 	get_tree().create_timer(anticipation_duration).timeout.connect(func():is_anticipating = false)
 
+#Detecta cuando aterriza el player para activar la animación de aterrizaje
 func check_landing():
 	var is_in_air = not is_on_floor()
 	
@@ -207,18 +223,21 @@ func check_landing():
 	was_in_air = is_in_air
 
 func start_spin():
+	#Inicia el spin
 	is_spinning = true
 	can_spin = false
 	spin_timer = spin_duration
 	spin_rotation = 0.0
 
+	#Pequeño impulso hacia arriba
 	velocity.y = spin_boost
 
+	#Si el player se mueve durante el spin
 	if abs(velocity.x) > 10:
+		#Agrega una pequeña aceleración al moviento horizontal
 		velocity.x *= spin_horizontal_boost
 
-	# Aqui poer los efectos de sonido o particulas al hacer el spin
-
+#Termina el spin y devuelve el sprite a su posición normal
 func end_spin():
 	is_spinning = false
 	animated_sprite.scale.x = 1.0
@@ -228,12 +247,16 @@ func update_spin_visual(delta: float):
 	if not is_spinning:
 		return
 
+	#A que velocidad tiene que girar
 	var spin_speed = (PI * 1.0) / spin_duration
 	spin_rotation += spin_speed * delta
-	
+
+	#Se "aplasta" el sprite del player para que cuando haga spin
+	#de la sensación de que esta girando como un papel
 	var effect_paper_mario = abs(cos(spin_rotation))
 	animated_sprite.scale.x = lerp(0.1, 1.0, effect_paper_mario)
 
+	#Si el sprite mira a la izquierda, lo invierte
 	if animated_sprite.flip_h:
 		animated_sprite.scale.x = -abs(animated_sprite.scale.x)
 
@@ -247,7 +270,15 @@ func handle_horizontal_movement(delta: float):
 	var accel: float = acceleration
 	var fric: float = friction
 
+	#El player en el aire usa distintos valores
 	if not is_on_floor():
+		"""
+		Mayor aceleración al cambiar de dirección en el aire, si no pasara esto seria
+		muy tedioso cambiar de direccion en el aire aparte de lento ya que el jugador
+		tiene que cancelar la velocidad hacia la que esta yendo y luego empezar a
+		acelerar hacia la que quiere ir, con una mayor aceleración al cambiar de direccion
+		se siente mas fluido el movimiento en el aire
+		"""
 		if direction != 0 and velocity.x != 0 and sign(direction) != sign(velocity.x):
 			accel = air_turn_acceleration
 		else:
@@ -293,10 +324,11 @@ func update_animation():
 	
 	var new_animation = ""
 	var ability_animation = ""
-
+	#Coge la animacion de la habilidad activa (si existe)
 	if not abilities.is_empty():
 		ability_animation = abilities[current_ability_index].get_animation_name()
 
+	#Elige la animación correcta segun el estado del player
 	if is_hit:
 		new_animation = "hit"
 	elif ability_animation != "":
@@ -317,7 +349,8 @@ func update_animation():
 			new_animation = "jump"
 		else:
 			new_animation = "fall"
-		
+
+	#Cambia si es distinta a la anterior
 	if animated_sprite.animation != new_animation:
 		animated_sprite.play(new_animation)
 	
@@ -334,31 +367,24 @@ func handle_abilities(delta: float):
 		ability_in_control = false
 		return
 
+	#La habilidad "toma el control" de movimiento
+	#Como en dash que no podemos movernos verticalmente
 	ability_in_control = selected_ability.physics_update(delta)
 
-func cycle_ability():
-	if abilities.size() <= 1:
-		return
-
-	current_ability_index = (current_ability_index + 1) % abilities.size()
-	var ability_name = abilities[current_ability_index].name
-	print("Habilidad seleccionada: %s" % ability_name)
-
 func _unhandled_input(event):
+	#Si se pulsa el boton de saltar
 	if event.is_action_pressed("ui_accept"):
 		var can_jump = is_on_floor() or coyote_time_timer > 0.0
-		
+		#Si puede saltar
 		if can_jump:
 			jump_buffer_timer = jump_buffer_duration
 			jump_was_pressed = false
+		#Mientras esta en el aire si puede hacer un spin
 		elif can_spin and not is_on_floor() and not is_spinning and not ability_in_control:
 			start_spin()
 			
 	if event.is_action_released("ui_accept"):
 		jump_was_pressed = false
-	
-	if abilities.size() > 1 and event.is_action_pressed("cycle_ability"):
-		cycle_ability()
 
 	if not abilities.is_empty() and event.is_action_pressed("ability_action"):
 		var selected_ability = abilities[current_ability_index]
@@ -367,11 +393,13 @@ func _unhandled_input(event):
 		if unlocked_abilities.get(selected_ability.name, false):
 			selected_ability.activate()
 
+#Devuelve la habilidad actual
 func get_current_ability() -> AbilityBase:
 	if abilities.is_empty():
 		return null
 	return abilities[current_ability_index]
 
+#Comprueba si el player tiene una habilidad especifica
 func has_ability(ability_name: String) -> bool:
 	for ability in abilities:
 		if ability.name == ability_name:
@@ -397,46 +425,59 @@ func collect_item(collectible: Collectible):
 
 	print("temp_collected_items ahora: ", GameManager.temp_collected_items)
 
-	# Llamar al método collect() dl coleccionable para que se destruya
+	# Llamar al método collect() del coleccionable para que se destruya
 	if collectible.has_method("collect"):
 		collectible.collect()
 
+#Si el player mira a la derecha = 1 si mira a la izquierda = -1
 func get_facing_direction() -> int:
 	return 1 if animated_sprite.flip_h else -1
 
 func take_damage(damage: int, knockback_direction: Vector2 = Vector2.ZERO):
+	#Si el player esta muerto o es invencible no recibe daño
 	if is_dead or is_invincible:
 		return
 
-	#Bjar vida
+	#Reduce en 1 la vida
 	current_health -= damage
 	current_health = max(current_health, 0)
 
 	print("Player recibio daño. Vida: ", current_health, "/", max_health)
 
+	#Le dice al hud que al player le cambio la vida
 	player_damaged.emit(damage)
 	health_changed.emit(current_health, max_health)
 
+	#Animacion de golpeo
 	is_hit = true
 	animated_sprite.play("hit")
 
+	#Si el player se mueve retrocede en la direccion opuesta al enemigo
 	if knockback_direction != Vector2.ZERO:
 		velocity = knockback_direction.normalized() * knockback_force
 
 	_activate_invincibility()
 
+	#El player ya no esta siendo golpeado despues de 0.4 segundos
 	get_tree().create_timer(0.4).timeout.connect(func():
 		is_hit = false
 	)
 
+	#Si la vida llega a 0 el player muere
 	if current_health <= 0:
 		die()
 	else:
+		#Si no el player vuelve a reproducir la animacion idle
 		get_tree().create_timer(0.4).timeout.connect(func():
 			if not is_dead:
 				animated_sprite.play("idle")
 		)
 
+"""
+Cuando el player es golpeado activa invencibilidad durante 1.5 segundos
+y el sprite del player parpadea para indicar al jugador que no le pueden
+hacer daño durante ese parpadeo
+"""
 func _activate_invincibility():
 	is_invincible = true
 
@@ -448,17 +489,20 @@ func _activate_invincibility():
 	print("Invencibilidad activada por ", invincibility_duration, " segundos")
 
 func _start_blink_effect():
+	#El sprite del player aparece y desaparece 5 veces
 	var blink_count = 5
 	var blink_duration = invincibility_duration / (blink_count * 2)
 
 	for i in range(blink_count):
 		if not is_inside_tree():
 			return
+
 		await get_tree().create_timer(blink_duration).timeout
 
 		if not is_inside_tree():
 			return
-			
+		
+		#El sprite del player se vuelve semi-transparente
 		animated_sprite.modulate.a = 0.3
 		
 		if not is_inside_tree():
@@ -468,9 +512,11 @@ func _start_blink_effect():
 		
 		if not is_inside_tree():
 			return
-			
+
+		#Devuelve el sprite a ser visible por completo
 		animated_sprite.modulate.a = 1.0
 
+#Desactiva la invencibilidad
 func _on_invincibility_timeout():
 	is_invincible = false
 	animated_sprite.modulate.a = 1.0
@@ -480,13 +526,16 @@ func die():
 	if is_dead:
 		return
 
+	#Emite la señal de que el player murio
 	is_dead = true
 	player_died.emit()
 
 	print("Player muerto")
 
+	#Desactiva los controles para que no se pueda mover
 	set_physics_process(false)
 
+	#Reproduce 2 animaciones de muerte
 	animated_sprite.play("dead_hit")
 
 	await get_tree().create_timer(0.8).timeout
@@ -496,12 +545,15 @@ func die():
 	await get_tree().create_timer(0.5).timeout
 
 	var level = get_tree().current_scene
+	#Si el nivel puede reaparecer al player lo hace
 	if level and level.has_method("respawn_player"):
 		level.respawn_player()
 	else:
+		#Si no, recarga la escena
 		get_tree().reload_current_scene()
 
 func respawn(spawn_position: Vector2):
+	#Resetear estados
 	is_dead = false
 	is_hit = false
 	is_invincible = false
@@ -542,28 +594,40 @@ func respawn(spawn_position: Vector2):
 	print("Player respawn en: ", spawn_position)
 
 func _on_hurt_box_body_entered(body: Node2D):
+	#Solo reacciona a los enemigos
 	if not body.is_in_group("enemies"):
 		return
 		
 	if is_invincible or is_dead:
 		return
-		
+
+	#Detecta si el player esta cayendo sobre un enemigo
 	var is_falling_on_enemy = (velocity.y > 0 or is_spinning) and global_position.y < body.global_position.y
 	
+	#Si el player cae sobre un enemigo
 	if is_falling_on_enemy:
+		#Daña al enemigo
 		stomp_enemy(body)
 	else:
+		"""
+		Si no, significa que esta colisionando de otra manera
+		que no es sobre el enemigo, por lo tanto el player
+		tiene que recibir daño
+		"""
 		var knockback_dir := global_position - body.global_position
 		take_damage(1, knockback_dir)
 		print("Colisión con enemigo: ", body.name)
 		
 func stomp_enemy(enemy: Node2D):
+	#El player daña al enemigo si este puede recibir daño
 	if enemy.has_method("take_damage"):
 		enemy.take_damage(stomp_damage)
 		print("¡Saltaste sobre ", enemy.name, "!")
-		
+
+	#El player rebota hacia arriba despues de saltar sobre un enemigo
 	velocity.y = stomp_bounce_force
 	
+	#Como el player "toco algo de suelo" puede volver a hacer spin
 	can_spin = true
 	if is_spinning:
 		end_spin()
@@ -576,7 +640,7 @@ func update_camera_offset(delta: float):
 	if abs(velocity.x) > camera_move_threshold:
 		var target_offset_x = camera_look_ahead if animated_sprite.flip_h else -camera_look_ahead
 		camera.offset.x = lerp(camera.offset.x, target_offset_x, camera_smooth_speed * delta)
-	# Si está quieto, mantener la vista de la ca,mara
+	# Si está quieto, mantener la vista de la cámara
 
 #Gestión de habilidades temporales
 func unlock_temp_ability(ability_name: String):
@@ -584,13 +648,16 @@ func unlock_temp_ability(ability_name: String):
 		unlocked_abilities[ability_name] = true
 		print("Habilidad desbloqueada: ", ability_name)
 
+#Bloquea todas las habilidades
 func clear_temp_abilities():
 	for key in unlocked_abilities.keys():
 		unlocked_abilities[key] = false
 	print("Habilidades bloqueadas")
 
+#Devuelve una copia del estado de las habilidades
 func get_unlocked_abilities() -> Dictionary:
 	return unlocked_abilities.duplicate()
 
+#Restaura el estado de las habilidades
 func restore_unlocked_abilities(abilities_state: Dictionary):
 	unlocked_abilities = abilities_state.duplicate()
