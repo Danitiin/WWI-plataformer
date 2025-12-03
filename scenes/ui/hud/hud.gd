@@ -53,7 +53,6 @@ func _on_coin_collected(_coin):
 #Actualiza los diamantes
 func _on_diamond_collected(_collectible):
 	update_diamond_display()
-	print("Diamante recogido! Total: ", GameManager.temp_collected_items.size())
 
 func update_diamond_display():
 	#Actualiza los sprites de los diamantes

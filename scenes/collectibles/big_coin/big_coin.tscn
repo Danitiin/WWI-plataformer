@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bvk6mthybt2hs"]
+[gd_scene load_steps=12 format=3 uid="uid://bvk6mthybt2hs"]
 
 [ext_resource type="PackedScene" uid="uid://bsxwalpytyj5e" path="res://scenes/collectibles/collectible_base/collectible_base.tscn" id="1_txsjx"]
 [ext_resource type="Texture2D" uid="uid://dp1y70iu344rb" path="res://assets/items/gems/Blue Diamond/01.png" id="2_speti"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ceo8bg1u7knk" path="res://assets/items/gems/Diamond Effect/02.png" id="7_rdx4b"]
 [ext_resource type="Texture2D" uid="uid://ld26h3ww837t" path="res://assets/items/gems/Diamond Effect/03.png" id="8_d43uw"]
 [ext_resource type="Texture2D" uid="uid://ylat1lxweoad" path="res://assets/items/gems/Diamond Effect/04.png" id="9_rb7hw"]
+[ext_resource type="AudioStream" uid="uid://dj3857cbvphsb" path="res://assets/audio/sfx/collectibles/diamond/diamond.wav" id="10_rdx4b"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_km7tn"]
 animations = [{
@@ -59,4 +60,5 @@ frame_progress = 1.0
 position = Vector2(0, -1)
 
 [node name="DiamondSound" type="AudioStreamPlayer2D" parent="." index="3"]
+stream = ExtResource("10_rdx4b")
 bus = &"SFX"

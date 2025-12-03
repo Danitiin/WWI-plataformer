@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://dkr745tr7kxm3"]
+[gd_scene load_steps=20 format=4 uid="uid://dkr745tr7kxm3"]
 
 [ext_resource type="Script" uid="uid://bt7tjqqvxtqol" path="res://scenes/levels/level_03/level_03.gd" id="2_hc64q"]
 [ext_resource type="PackedScene" uid="uid://bvk6mthybt2hs" path="res://scenes/collectibles/big_coin/big_coin.tscn" id="2_ulqsn"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://d4jf31tep4lx5" path="res://scenes/hazards/kill_zone/kill_zone.tscn" id="15_7sdh6"]
 [ext_resource type="PackedScene" uid="uid://bi8xk7l71nrk1" path="res://scenes/level_finish/level_finish.tscn" id="17_vfnik"]
 [ext_resource type="PackedScene" uid="uid://bniu3lhryu7x1" path="res://scenes/level_finish/flag_finish.tscn" id="18_vb6cb"]
+[ext_resource type="AudioStream" uid="uid://cvxtmp0jja3cm" path="res://assets/audio/music/levels/music_levels.wav" id="19_wuuu8"]
 
 [node name="Level03" type="Node2D"]
 script = ExtResource("2_hc64q")
@@ -428,3 +429,8 @@ visible = false
 
 [node name="FlagFinish" parent="." instance=ExtResource("18_vb6cb")]
 position = Vector2(6171, 34)
+
+[node name="LevelMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_wuuu8")
+autoplay = true
+bus = &"Music"

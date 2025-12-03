@@ -64,6 +64,4 @@ shape = SubResource("CircleShape2D_60v3x")
 
 [node name="CoinSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_60v3x")
-max_distance = 4096.0
-attenuation = 5.0982404
 bus = &"SFX"

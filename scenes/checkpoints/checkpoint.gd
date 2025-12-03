@@ -18,7 +18,6 @@ func _on_body_entered(body: Node2D):
 
 func activate(player = null):
     is_activated = true
-    print("Checkpoint puesto en: ", global_position)
 
     var level = get_tree().current_scene
     if level and level.has_method("activate_checkpoint"):

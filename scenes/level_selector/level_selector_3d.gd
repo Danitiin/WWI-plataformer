@@ -25,20 +25,19 @@ func _ready():
 		dialogue_label.started_typing.connect(func(): animated_sprite.play("talk"))
 		dialogue_label.finished_typing.connect(func(): animated_sprite.play("idle"))
 
+		await DialogueManager.dialogue_ended
+
+		#Escondemos a Tin
+		tin.visible = false
+
 		"""
 		Una vez el dialogo acabe, y no antes (si se guardara antes y se cerrara el juego
 		o el jugador saliera al menu principal una vez el jugador vuelva a entrar a level_selector_3d
 		no saltaria el dialogo y no podria verlo) se guarda como visto para que no vuelva a aparecer
 		cuando el player vuelva a level selector
-		(PUESTO AQUI TEMPORALMENTE, DEBUG)
 		"""
 		PlayerData.intro_dialogue_seen = true
 		PlayerData.save_game()
-
-		await DialogueManager.dialogue_ended
-
-		#Escondemos a Tin
-		tin.visible = false
 
 		#El player se puede mover
 		if player:

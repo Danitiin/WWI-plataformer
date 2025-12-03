@@ -27,10 +27,6 @@ func update_level_status():
 	#Coleccionables que se han recogido en el nivel
 	var collected = PlayerData.get_collected_items_for_level(level_id)
 
-	print("PORTAL_SIGN UPDATE")
-	print("Nivel: ", level_id)
-	print("Coleccionables recogidos: ", collected)
-
 	#verificar cuales se han recogido
 	var diamond1_collected: bool = 0 in collected
 	var diamond2_collected: bool = 1 in collected
@@ -46,7 +42,3 @@ func update_level_status():
 
 	$DiamondsFilled/Diamond3Filled.visible = diamond3_collected
 	$DiamondsEmptys/Diamond3Empty.visible = not diamond3_collected
-
-	print("Diamond1 filled: ", diamond1_collected, " | empty: ", not diamond1_collected)
-	print("Diamond2 filled: ", diamond2_collected, " | empty: ", not diamond2_collected)
-	print("Diamond3 filled: ", diamond3_collected, " | empty: ", not diamond3_collected)

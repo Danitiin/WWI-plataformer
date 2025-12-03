@@ -9,6 +9,11 @@ var active_checkpoint_position: Vector2
 var has_active_checkpoint: bool = false
 
 func _ready():
+	#Configurar música en loop
+	if has_node("LevelMusic"):
+		var music = $LevelMusic
+		music.finished.connect(_on_music_finished)
+
 	#Se añade al player como hijo
 	player = player_scene.instantiate()
 	add_child(player)
@@ -27,26 +32,20 @@ func _ready():
 	#quitar habilidades al entrar al nivel
 	if player.has_method("clear_temp_abilities"):
 		player.clear_temp_abilities()
-		print("Habilidades limpiadas al entrar al nivel")
 
 	restore_checkpoint_if_exits()
 
 	# Si hay checkpoint activo, mover al player ahí y restaurar habilidades
 	if has_active_checkpoint:
 		player.global_position = active_checkpoint_position
-		print("Player spawneado en checkpoint: ", active_checkpoint_position)
 
 		#Si hay datos y el player tiene el metodo indicado se restaura la habilidad
 		if level_data and player.has_method("restore_unlocked_abilities"):
 			#Vemos que habilidad del nivel es y si esta activa (si el player recogio la pocion)
 			var saved_abilities = GameManager.get_checkpoint_abilities(level_data.level_id)
-			print("Habilidades guardadas en GameManager: ", saved_abilities)
 			if not saved_abilities.is_empty():
 				#Se restaura la habilidad
 				player.restore_unlocked_abilities(saved_abilities)
-				print("Habilidades restauradas desde checkpoint: ", saved_abilities)
-			else:
-				print("NO hay habilidades guardadas en el checkpoint")
 
 	if level_data:
 		hide_collected_items()
@@ -56,16 +55,12 @@ func restore_checkpoint_if_exits():
 		return
 	#Ver el checkpoint esta guardado
 	if GameManager.level_checkpoints.has(level_data.level_id):
-		print("DEBUG: Buscando checkpoint para level_id: ", level_data.level_id)
-		print("DEBUG: Checkpoints guardados en GameManager: ", GameManager.level_checkpoints)
 		#Guardamos la posicion del checkpoint y lo activamos
 		var checkpoint_pos = GameManager.level_checkpoints[level_data.level_id]
 		active_checkpoint_position = checkpoint_pos
 		has_active_checkpoint = true
 
 		reactivate_checkpoint_visual(checkpoint_pos)
-
-		print("Checkpoint restaurado en: ", checkpoint_pos)
 
 func hide_collected_items():
 	var collectibles = get_tree().get_nodes_in_group("collectibles")
@@ -83,15 +78,10 @@ func hide_collected_items():
 				collectible.queue_free()
 
 func activate_checkpoint(checkpoint_position: Vector2, player_node = null):
-	print("DEBUG activate_checkpoint llamado")
-	print("DEBUG level_data: ", level_data)
-	print("DEBUG level_data es null: ", level_data == null)
-
 	active_checkpoint_position = checkpoint_position
 	has_active_checkpoint = true
 
 	if level_data:
-		print("DEBUG: Guardando checkpoint en GameManager con level_id: ", level_data.level_id)
 		#Guarda la posicion del checkpoint y los coleccionables recogidos hasta ese momento
 		GameManager.level_checkpoints[level_data.level_id] = checkpoint_position
 		GameManager.save_checkpoint_collectibles(level_data.level_id)
@@ -100,9 +90,6 @@ func activate_checkpoint(checkpoint_position: Vector2, player_node = null):
 		if player_node and player_node.has_method("get_unlocked_abilities"):
 			var abilities = player_node.get_unlocked_abilities()
 			GameManager.save_checkpoint_abilities(level_data.level_id, abilities)
-			print("Checkpoint guardó habilidades del player: ", abilities)
-
-		print("Checkpoint guardado para el nivel: ", level_data.level_id)
 
 	desactivate_other_checkpoints(checkpoint_position)
 
@@ -128,3 +115,7 @@ func respawn_player():
 	# Recargar la escena completa para que reaparezcan las monedas
 	# Los diamantes no reaparecen porque hide_collected_items() los destruye
 	get_tree().reload_current_scene()
+
+func _on_music_finished():
+	if has_node("LevelMusic"):
+		$LevelMusic.play()

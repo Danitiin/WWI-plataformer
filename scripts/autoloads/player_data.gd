@@ -1,5 +1,5 @@
 extends Node
-const DEBUG_MODE = true
+const DEBUG_MODE = false
 
 var completed_levels: Array[int] = []
 var collected_items: Dictionary = {}

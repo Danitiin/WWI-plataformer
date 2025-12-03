@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://cpbacnqtb4bi1"]
+[gd_scene load_steps=49 format=4 uid="uid://cpbacnqtb4bi1"]
 
 [ext_resource type="Script" uid="uid://b24lthyqe7gih" path="res://scenes/levels/level_02/level_02.gd" id="1_e78mx"]
 [ext_resource type="Resource" uid="uid://w0fkbusaohtf" path="res://resources/levels/level_02_data.tres" id="2_0kshx"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://d4jf31tep4lx5" path="res://scenes/hazards/kill_zone/kill_zone.tscn" id="20_m88yi"]
 [ext_resource type="PackedScene" uid="uid://ci72621xo5h3g" path="res://scenes/hazards/spikes/spike.tscn" id="21_617vc"]
 [ext_resource type="PackedScene" uid="uid://bniu3lhryu7x1" path="res://scenes/level_finish/flag_finish.tscn" id="25_gf26o"]
+[ext_resource type="AudioStream" uid="uid://cvxtmp0jja3cm" path="res://assets/audio/music/levels/music_levels.wav" id="26_cxop6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_at8xp"]
 texture = ExtResource("7_at8xp")
@@ -1594,3 +1595,8 @@ visible = false
 
 [node name="FlagFinish" parent="." instance=ExtResource("25_gf26o")]
 position = Vector2(5369, 98)
+
+[node name="LevelMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("26_cxop6")
+autoplay = true
+bus = &"Music"

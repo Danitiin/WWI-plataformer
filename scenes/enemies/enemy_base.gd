@@ -52,8 +52,6 @@ func take_damage(damage: int):
 	current_health -= damage
 	current_health = max(current_health, 0)
 
-	print(name, " recibio daño " , current_health, "/", max_health)
-
 	if current_health <= 0:
 		die()
 
@@ -63,8 +61,6 @@ func die():
 
 	is_dying = true
 	enemy_dead.emit()
-
-	print(name, " murio")
 
 	if collision_shape:
 		collision_shape.set_deferred("disabled", true)

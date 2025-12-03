@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cq7ygttaymho8"]
+[gd_scene load_steps=22 format=4 uid="uid://cq7ygttaymho8"]
 
 [ext_resource type="Script" uid="uid://88smftbebkju" path="res://scenes/levels/level_01/level_01.gd" id="2_15mrc"]
 [ext_resource type="Resource" uid="uid://cptkn01au3wk1" path="res://resources/levels/level_01_data.tres" id="2_fi7ee"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bdrq670txpyx7" path="res://assets/enviroment/props/palm_trees/tile_set_palmera.tscn" id="17_s4sw7"]
 [ext_resource type="PackedScene" uid="uid://bniu3lhryu7x1" path="res://scenes/level_finish/flag_finish.tscn" id="18_cwr5l"]
 [ext_resource type="PackedScene" uid="uid://duhuoec6an78l" path="res://scenes/player/abilities/Dash/item/item_dash.tscn" id="18_wo1oe"]
+[ext_resource type="AudioStream" uid="uid://cvxtmp0jja3cm" path="res://assets/audio/music/levels/music_levels.wav" id="19_cwr5l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n50fv"]
 texture = ExtResource("5_s4sw7")
@@ -310,9 +311,6 @@ position = Vector2(1097, 81)
 [node name="Coin69" parent="Items/Coins" instance=ExtResource("16_n50fv")]
 position = Vector2(1216, 81)
 
-[node name="Coin70" parent="Items/Coins" instance=ExtResource("16_n50fv")]
-position = Vector2(1216, 81)
-
 [node name="Coin56" parent="Items/Coins" instance=ExtResource("16_n50fv")]
 position = Vector2(633, -121)
 
@@ -555,3 +553,8 @@ visible = false
 
 [node name="FlagFinish" parent="." instance=ExtResource("18_cwr5l")]
 position = Vector2(5405, -78)
+
+[node name="LevelMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_cwr5l")
+autoplay = true
+bus = &"Music"

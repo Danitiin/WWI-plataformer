@@ -409,21 +409,11 @@ func has_ability(ability_name: String) -> bool:
 func collect_item(collectible: Collectible):
 	var collectible_id = collectible.collectible_id
 
-	print("RECOGIENDO COLECCIONABLE")
-	print("Collectible ID: ", collectible_id)
-	print("Ya está en PlayerData? ", PlayerData.is_collectible_collected(GameManager.current_level, collectible_id))
-
 	if PlayerData.is_collectible_collected(GameManager.current_level, collectible_id):
-		print("YA ESTABA GUARDADO PERMANENTEMENTE, ignorando")
 		return
-
-	print("Ya está en temp_collected_items? ", collectible_id in GameManager.temp_collected_items)
 
 	if collectible_id not in GameManager.temp_collected_items:
 		GameManager.temp_collected_items.append(collectible_id)
-		print("AÑADIDO a temp_collected_items")
-
-	print("temp_collected_items ahora: ", GameManager.temp_collected_items)
 
 	# Llamar al método collect() del coleccionable para que se destruya
 	if collectible.has_method("collect"):
@@ -442,8 +432,6 @@ func take_damage(damage: int, knockback_direction: Vector2 = Vector2.ZERO):
 	current_health -= damage
 	current_health = max(current_health, 0)
 
-	print("Player recibio daño. Vida: ", current_health, "/", max_health)
-
 	#Le dice al hud que al player le cambio la vida
 	player_damaged.emit(damage)
 	health_changed.emit(current_health, max_health)
@@ -451,6 +439,10 @@ func take_damage(damage: int, knockback_direction: Vector2 = Vector2.ZERO):
 	#Animacion de golpeo
 	is_hit = true
 	animated_sprite.play("hit")
+
+	# Reproduce sonido de daño
+	if has_node("HurtSound"):
+		$HurtSound.play()
 
 	#Si el player se mueve retrocede en la direccion opuesta al enemigo
 	if knockback_direction != Vector2.ZERO:
@@ -486,8 +478,6 @@ func _activate_invincibility():
 	var timer := get_tree().create_timer(invincibility_duration)
 	timer.timeout.connect(_on_invincibility_timeout)
 
-	print("Invencibilidad activada por ", invincibility_duration, " segundos")
-
 func _start_blink_effect():
 	#El sprite del player aparece y desaparece 5 veces
 	var blink_count = 5
@@ -520,7 +510,6 @@ func _start_blink_effect():
 func _on_invincibility_timeout():
 	is_invincible = false
 	animated_sprite.modulate.a = 1.0
-	print("Invencibilidad desactivada")
 
 func die():
 	if is_dead:
@@ -530,10 +519,12 @@ func die():
 	is_dead = true
 	player_died.emit()
 
-	print("Player muerto")
-
 	#Desactiva los controles para que no se pueda mover
 	set_physics_process(false)
+
+	#Reproduce sonido de muerte
+	if has_node("DeadSound"):
+		$DeadSound.play()
 
 	#Reproduce 2 animaciones de muerte
 	animated_sprite.play("dead_hit")
@@ -591,8 +582,6 @@ func respawn(spawn_position: Vector2):
 	animated_sprite.rotation = 0.0
 	animated_sprite.play("idle")
 
-	print("Player respawn en: ", spawn_position)
-
 func _on_hurt_box_body_entered(body: Node2D):
 	#Solo reacciona a los enemigos
 	if not body.is_in_group("enemies"):
@@ -616,13 +605,11 @@ func _on_hurt_box_body_entered(body: Node2D):
 		"""
 		var knockback_dir := global_position - body.global_position
 		take_damage(1, knockback_dir)
-		print("Colisión con enemigo: ", body.name)
 		
 func stomp_enemy(enemy: Node2D):
 	#El player daña al enemigo si este puede recibir daño
 	if enemy.has_method("take_damage"):
 		enemy.take_damage(stomp_damage)
-		print("¡Saltaste sobre ", enemy.name, "!")
 
 	#El player rebota hacia arriba despues de saltar sobre un enemigo
 	velocity.y = stomp_bounce_force
@@ -646,13 +633,11 @@ func update_camera_offset(delta: float):
 func unlock_temp_ability(ability_name: String):
 	if unlocked_abilities.has(ability_name):
 		unlocked_abilities[ability_name] = true
-		print("Habilidad desbloqueada: ", ability_name)
 
 #Bloquea todas las habilidades
 func clear_temp_abilities():
 	for key in unlocked_abilities.keys():
 		unlocked_abilities[key] = false
-	print("Habilidades bloqueadas")
 
 #Devuelve una copia del estado de las habilidades
 func get_unlocked_abilities() -> Dictionary:

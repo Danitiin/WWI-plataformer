@@ -29,6 +29,11 @@ func collect():
     reproduce la animacion de obtener y se destruye
     """
     collected.emit(self)
+
+    #Reproduce sonido de diamond
+    if has_node("DiamondSound"):
+          $DiamondSound.play()
+
     if sprite and sprite.sprite_frames and sprite.sprite_frames.has_animation("obtain"):
         sprite.play("obtain")
         await sprite.animation_finished

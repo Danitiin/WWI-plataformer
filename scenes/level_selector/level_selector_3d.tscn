@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://batkcp513waqy" path="res://scenes/level_selector/portals/portal_base.tscn" id="3_8mlps"]
 [ext_resource type="PackedScene" uid="uid://266awlb6oxi4" path="res://scenes/level_selector/portals/sing/portal_sign.tscn" id="4_jc8gx"]
 [ext_resource type="PackedScene" uid="uid://s4joiixvs22j" path="res://scenes/ui/pause_menu/pause_menu.tscn" id="5_j0mf1"]
-[ext_resource type="AudioStream" uid="uid://d17cqtfxmfvxo" path="res://assets/audio/music/level_selector_3d/level_selector_music.mp3" id="6_cmjsy"]
+[ext_resource type="AudioStream" uid="uid://b4n1bl81i2jpu" path="res://assets/audio/music/level_selector_3d/level_selector_music.wav" id="6_07u3t"]
 [ext_resource type="PackedScene" uid="uid://dyoxbqehwwb50" path="res://scenes/ui/tin_tutorial/tin.tscn" id="7_va4v3"]
 [ext_resource type="PackedScene" uid="uid://dfnimd1oi3uc6" path="res://scenes/level_selector/npcs/wingull.tscn" id="8_07u3t"]
 
@@ -403,7 +403,7 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 visible = false
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("6_cmjsy")
+stream = ExtResource("6_07u3t")
 autoplay = true
 bus = &"Music"
 
