@@ -12,7 +12,7 @@ config_version=5
 
 config/name="WWI_Source"
 run/main_scene="uid://beldljiufx01u"
-config/features=PackedStringArray("4.5", "Mobile")
+config/features=PackedStringArray("4.5", "C#", "Mobile")
 run/max_fps=60
 config/icon="res://icon.svg"
 
