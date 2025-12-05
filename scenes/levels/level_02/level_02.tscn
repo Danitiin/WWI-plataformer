@@ -1596,11 +1596,6 @@ visible = false
 [node name="FlagFinish" parent="." instance=ExtResource("25_gf26o")]
 position = Vector2(5369, 98)
 
-[node name="LevelMusic2" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("26_cxop6")
-autoplay = true
-bus = &"Music"
-
 [node name="LevelMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("26_cxop6")
 autoplay = true
