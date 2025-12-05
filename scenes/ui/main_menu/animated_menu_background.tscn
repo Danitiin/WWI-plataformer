@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://xuswooh14f8m"]
-
-[node name="AnimatedMenuBackground" type="Node2D"]
-
-[node name="SkyLayer" type="Parallax2D" parent="."]
-
-[node name="GroundLayer" type="Parallax2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

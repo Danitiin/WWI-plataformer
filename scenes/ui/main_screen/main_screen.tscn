@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://chig0av5baroe"]
+
+[ext_resource type="Script" uid="uid://dunhv5r7jhxgi" path="res://scenes/ui/main_screen/main_screen.gd" id="1_5ecw8"]
+[ext_resource type="Texture2D" uid="uid://cgjxaifgjpwh3" path="res://assets/ui/main_screen/main_island.png" id="1_oxe5s"]
+[ext_resource type="Script" uid="uid://bxbgisnklqkfx" path="res://scenes/ui/main_screen/label.gd" id="3_2g4ls"]
+
+[node name="MainScreen" type="CanvasLayer"]
+script = ExtResource("1_5ecw8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_oxe5s")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
+offset_left = -61.5
+offset_top = -23.0
+offset_right = 61.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "- Pulsa Espacio -"
+script = ExtResource("3_2g4ls")
